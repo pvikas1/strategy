@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSX Dividend Capture Strategy</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    min-height: 100vh;
+    color: #e2e8f0;
+    padding: 24px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-size: 28px; font-weight: 800;
+    background: linear-gradient(90deg, #22c55e, #3b82f6, #a855f7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { color: #94a3b8; margin-top: 8px; font-size: 14px; }
+
+  /* Capital Box */
+  .capital-box {
+    background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px;
+    margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .capital-box label { font-size: 13px; color: #94a3b8; display: block; margin-bottom: 4px; }
+  .capital-box input {
+    background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+    padding: 10px 14px; color: #e2e8f0; font-size: 18px; font-weight: 700; width: 180px;
+    outline: none;
+  }
+  .capital-box input:focus { border-color: #3b82f6; }
+  .capital-result { flex: 1; text-align: right; }
+  .capital-result .label { font-size: 13px; color: #94a3b8; }
+  .capital-result .amount { font-size: 28px; font-weight: 800; color: #22c55e; }
+  .capital-result .pct { font-size: 13px; color: #94a3b8; }
+
+  /* Warning */
+  .warning {
+    background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 10px; padding: 16px; margin-bottom: 24px;
+    font-size: 13px; color: #fbbf24;
+  }
+  .warning strong { display: block; margin-bottom: 6px; }
+  .warning ul { margin: 8px 0 0 20px; line-height: 1.8; }
+
+  /* Section Headings */
+  h2 { font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 16px; }
+
+  /* Rotation Steps */
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .step {
+    background: rgba(255,255,255,0.03); border-radius: 12px; padding: 16px;
+    border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: all 0.2s;
+  }
+  .step:hover { background: rgba(255,255,255,0.06); }
+  .step.active { background: rgba(255,255,255,0.08); }
+  .step-header { display: flex; align-items: center; gap: 12px; }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff; flex-shrink: 0;
+  }
+  .step-info { flex: 1; }
+  .step-title { font-weight: 700; font-size: 15px; color: #f8fafc; }
+  .step-action { font-size: 13px; color: #94a3b8; margin-top: 2px; }
+  .step-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .step-tag {
+    padding: 3px 8px; border-radius: 6px; font-size: 12px; font-weight: 700;
+  }
+  .step-detail {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px; color: #cbd5e1; line-height: 1.7; display: none;
+  }
+  .step.active .step-detail { display: block; }
+  .step-est { margin-top: 8px; }
+  .step-est strong { color: #f8fafc; }
+  .step-est .val { color: #22c55e; font-weight: 700; }
+
+  /* Table */
+  .table-note { font-size: 13px; color: #94a3b8; margin-bottom: 12px; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { border-bottom: 2px solid #334155; }
+  th {
+    padding: 10px 8px; text-align: left; color: #94a3b8;
+    cursor: pointer; font-weight: 600; white-space: nowrap; user-select: none;
+  }
+  th:hover { color: #e2e8f0; }
+  td { padding: 10px 8px; transition: all 0.2s; }
+  tr.even { background: rgba(255,255,255,0.02); }
+  tr.highlighted { border-left: 3px solid; }
+  .td-ticker { font-weight: 700; }
+  .td-name { color: #cbd5e1; }
+  .td-div { font-weight: 700; color: #22c55e; }
+  .td-yield { color: #fbbf24; }
+  .td-date { color: #94a3b8; }
+  .td-sector span {
+    background: rgba(255,255,255,0.06); padding: 2px 8px;
+    border-radius: 4px; font-size: 11px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px; padding: 16px;
+    background: rgba(255,255,255,0.03); border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px; color: #64748b; line-height: 1.8;
+  }
+  .footer strong { color: #94a3b8; }
+
+  @media (max-width: 640px) {
+    .capital-box { flex-direction: column; align-items: stretch; }
+    .capital-result { text-align: left; }
+    .step-header { flex-wrap: wrap; }
+    .step-tags { justify-content: flex-start; margin-top: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>TSX Dividend Capture Strategy</h1>
+    <p>Rotate capital through staggered ex-dividend dates to collect multiple dividends</p>
+  </div>
+
+  <!-- Capital Input -->
+  <div class="capital-box">
+    <div>
+      <label>Starting Capital (C$)</label>
+      <input type="number" id="capitalInput" value="50000" oninput="recalculate()">
+    </div>
+    <div class="capital-result">
+      <div class="label">Est. Total Dividends Captured (5 rotations)</div>
+      <div class="amount" id="totalDiv">$0.00</div>
+      <div class="pct" id="totalPct">~0.00% return in ~3 months</div>
+    </div>
+  </div>
+
+  <!-- Warning -->
+  <div class="warning">
+    <strong>&#9888;&#65039; Important Risks &amp; Considerations:</strong>
+    <ul>
+      <li>Stocks typically <strong>drop by the dividend amount</strong> on ex-date &mdash; you may lose on price what you gain in dividends</li>
+      <li>Trading commissions and bid-ask spreads eat into profits</li>
+      <li>Dividends are <strong>taxable income</strong> &mdash; eligible Canadian dividends get the tax credit, but frequent trading may trigger capital gains/losses</li>
+      <li>In volatile markets (like now with Iran conflict), price swings can dwarf dividend amounts</li>
+      <li>This strategy works best with <strong>large-cap, stable stocks</strong> that recover quickly post ex-date</li>
+      <li>CRA may reclassify frequent trading as business income &mdash; consult a tax advisor</li>
+    </ul>
+  </div>
+
+  <!-- Rotation Steps -->
+  <h2>5-Step Rotation Plan (Feb &rarr; Apr 2026)</h2>
+  <div class="steps" id="stepsContainer"></div>
+
+  <!-- Stock Reference Table -->
+  <h2>Full Stock Reference</h2>
+  <p class="table-note">Click column headers to sort. Highlighted rows match selected rotation step.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-col="ticker" onclick="sortTable('ticker')">Ticker</th>
+          <th data-col="name" onclick="sortTable('name')">Company</th>
+          <th data-col="qDiv" onclick="sortTable('qDiv')">Q Div ($) &#x25BC;</th>
+          <th data-col="yield" onclick="sortTable('yield')">Yield</th>
+          <th data-col="exDiv" onclick="sortTable('exDiv')">Ex-Div Date</th>
+          <th data-col="payDate" onclick="sortTable('payDate')">Pay Date</th>
+          <th data-col="sector" onclick="sortTable('sector')">Sector</th>
+        </tr>
+      </thead>
+      <tbody id="stockTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <strong>Disclaimer:</strong> This is for informational purposes only and is not financial advice. Ex-dividend dates are approximate and subject to change &mdash; always verify with your broker or the company&rsquo;s investor relations page before trading. Dividend capture strategies carry risks including price drops on ex-date, tax implications, and transaction costs. Past dividends do not guarantee future payments. Consult a qualified financial advisor before implementing any trading strategy.
+  </div>
+</div>
+
+<script>
+const STOCKS = [
+  { ticker:"ENB", name:"Enbridge", qDiv:0.97, exDiv:"~Feb 14", payDate:"Mar 1", payMonth:"Mar/Jun/Sep/Dec", yield:"6.5%", sector:"Energy Infra" },
+  { ticker:"SLF", name:"Sun Life", qDiv:0.92, exDiv:"~Feb 25", payDate:"Mar 31", payMonth:"Mar/Jun/Sep/Dec", yield:"5.2%", sector:"Insurance" },
+  { ticker:"GWO", name:"Great-West Lifeco", qDiv:0.67, exDiv:"~Mar 3", payDate:"Mar 31", payMonth:"Mar/Jun/Sep/Dec", yield:"4.1%", sector:"Insurance" },
+  { ticker:"MFC", name:"Manulife", qDiv:0.44, exDiv:"~Feb 24", payDate:"Mar 19", payMonth:"Mar/Jun/Sep/Dec", yield:"4.3%", sector:"Insurance" },
+  { ticker:"CM", name:"CIBC", qDiv:1.07, exDiv:"~Mar 27", payDate:"Apr 28", payMonth:"Jan/Apr/Jul/Oct", yield:"4.8%", sector:"Bank" },
+  { ticker:"BNS", name:"Scotiabank", qDiv:1.06, exDiv:"~Apr 1", payDate:"Apr 28", payMonth:"Jan/Apr/Jul/Oct", yield:"5.6%", sector:"Bank" },
+  { ticker:"BMO", name:"Bank of Montreal", qDiv:1.55, exDiv:"~Apr 30", payDate:"May 26", payMonth:"Feb/May/Aug/Nov", yield:"4.7%", sector:"Bank" },
+  { ticker:"RY", name:"Royal Bank", qDiv:1.64, exDiv:"~Apr 23", payDate:"May 22", payMonth:"Feb/May/Aug/Nov", yield:"2.9%", sector:"Bank" },
+  { ticker:"TD", name:"TD Bank", qDiv:1.08, exDiv:"~Apr 9", payDate:"Apr 30", payMonth:"Jan/Apr/Jul/Oct", yield:"4.7%", sector:"Bank" },
+  { ticker:"NA", name:"National Bank", qDiv:1.14, exDiv:"~Mar 25", payDate:"May 1", payMonth:"Feb/May/Aug/Nov", yield:"2.6%", sector:"Bank" },
+  { ticker:"TRP", name:"TC Energy", qDiv:1.02, exDiv:"~Mar 30", payDate:"Apr 30", payMonth:"Jan/Apr/Jul/Oct", yield:"5.8%", sector:"Energy Infra" },
+  { ticker:"BCE", name:"BCE Inc", qDiv:0.4988, exDiv:"~Mar 13", payDate:"Apr 15", payMonth:"Jan/Apr/Jul/Oct", yield:"11.8%", sector:"Telecom" },
+  { ticker:"T", name:"TELUS", qDiv:0.4023, exDiv:"~Mar 10", payDate:"Apr 1", payMonth:"Jan/Apr/Jul/Oct", yield:"7.5%", sector:"Telecom" },
+  { ticker:"CNQ", name:"Canadian Natural", qDiv:0.5625, exDiv:"~Mar 18", payDate:"Apr 2", payMonth:"Jan/Apr/Jul/Oct", yield:"4.0%", sector:"Energy" },
+  { ticker:"POW", name:"Power Corp", qDiv:0.6675, exDiv:"~Mar 11", payDate:"May 1", payMonth:"Feb/May/Aug/Nov", yield:"4.0%", sector:"Financial" },
+  { ticker:"IGM", name:"IGM Financial", qDiv:0.62, exDiv:"~Mar 23", payDate:"Apr 30", payMonth:"Jan/Apr/Jul/Oct", yield:"3.9%", sector:"Asset Mgmt" },
+];
+
+const ROTATION = [
+  { step:1, title:"Late February \u2192 Early March", action:"Buy SLF, GWO, MFC, ENB before their ex-dates", detail:"These stocks go ex-dividend in late Feb / early Mar. Buy at least 1 day before ex-div to qualify.", tickers:["ENB","SLF","GWO","MFC"], color:"#22c55e" },
+  { step:2, title:"After Ex-Div (Early March)", action:"Sell SLF, GWO, MFC, ENB after ex-date; rotate into TELUS, BCE, CNQ, POW", detail:"Sell the March payers after ex-date. Buy T, BCE, CNQ, POW before their mid-March ex-dates.", tickers:["T","BCE","CNQ","POW"], color:"#3b82f6" },
+  { step:3, title:"Mid to Late March", action:"Sell T, BCE, CNQ, POW after ex-date; rotate into CM, NA, TRP, IGM", detail:"These go ex-dividend in late March. Buy before ~Mar 23\u201330 ex-dates.", tickers:["CM","NA","TRP","IGM"], color:"#a855f7" },
+  { step:4, title:"Early April", action:"Sell CM, NA, TRP, IGM after ex-date; rotate into BNS, TD", detail:"BNS and TD go ex-dividend early April. Capture their dividends next.", tickers:["BNS","TD"], color:"#f59e0b" },
+  { step:5, title:"Mid to Late April", action:"Sell BNS, TD after ex-date; rotate into RY, BMO", detail:"Royal Bank and BMO go ex-dividend late April. These have the highest per-share payouts.", tickers:["RY","BMO"], color:"#ef4444" },
+];
+
+let currentSort = { col: "qDiv", asc: false };
+let activeStep = null;
+
+function getCapital() {
+  return Number(document.getElementById("capitalInput").value) || 0;
+}
+
+function approxPrice(s) {
+  const annualDiv = s.qDiv * 4;
+  return annualDiv / (parseFloat(s.yield) / 100);
+}
+
+function estimateStepDiv(tickers, capital) {
+  let d = 0;
+  const perStock = capital / tickers.length;
+  tickers.forEach(t => {
+    const s = STOCKS.find(x => x.ticker === t);
+    if (s) {
+      const shares = Math.floor(perStock / approxPrice(s));
+      d += shares * s.qDiv;
+    }
+  });
+  return d;
+}
+
+function estimateTotal() {
+  const capital = getCapital();
+  let total = 0;
+  ROTATION.forEach(r => { total += estimateStepDiv(r.tickers, capital); });
+  return total;
+}
+
+function recalculate() {
+  const capital = getCapital();
+  const est = estimateTotal();
+  document.getElementById("totalDiv").textContent = "$" + est.toFixed(2);
+  document.getElementById("totalPct").textContent = "~" + ((est / (capital || 1)) * 100).toFixed(2) + "% return in ~3 months";
+  renderSteps();
+}
+
+function renderSteps() {
+  const capital = getCapital();
+  const container = document.getElementById("stepsContainer");
+  container.innerHTML = "";
+
+  ROTATION.forEach((r, i) => {
+    const isActive = activeStep === i;
+    const div = document.createElement("div");
+    div.className = "step" + (isActive ? " active" : "");
+    if (isActive) div.style.borderColor = r.color;
+
+    const tags = r.tickers.map(t => {
+      const s = STOCKS.find(x => x.ticker === t);
+      return `<span class="step-tag" style="background:${r.color}22;color:${r.color};border:1px solid ${r.color}44">${t} ($${s ? s.qDiv.toFixed(2) : "?"})</span>`;
+    }).join("");
+
+    const stepDivEst = estimateStepDiv(r.tickers, capital);
+
+    div.innerHTML = `
+      <div class="step-header">
+        <div class="step-num" style="background:${r.color}">${r.step}</div>
+        <div class="step-info">
+          <div class="step-title">${r.title}</div>
+          <div class="step-action">${r.action}</div>
+        </div>
+        <div class="step-tags">${tags}</div>
+      </div>
+      <div class="step-detail">
+        ${r.detail}
+        <div class="step-est">
+          <strong>Estimated dividends this step: </strong>
+          <span class="val">$${stepDivEst.toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+
+    div.addEventListener("click", () => {
+      activeStep = activeStep === i ? null : i;
+      renderSteps();
+      renderTable();
+    });
+
+    container.appendChild(div);
+  });
+}
+
+function sortTable(col) {
+  if (currentSort.col === col) currentSort.asc = !currentSort.asc;
+  else { currentSort.col = col; currentSort.asc = false; }
+  // Update header arrows
+  document.querySelectorAll("th").forEach(th => {
+    const c = th.getAttribute("data-col");
+    const base = th.textContent.replace(/ [↑↓▲▼▽△]$/,"").replace(/ ▼$/,"").trim();
+    if (c === col) th.textContent = base + (currentSort.asc ? " \u2191" : " \u2193");
+    else th.textContent = base;
+  });
+  renderTable();
+}
+
+function renderTable() {
+  const sorted = [...STOCKS].sort((a, b) => {
+    const col = currentSort.col;
+    let av = a[col], bv = b[col];
+    if (col === "yield") { av = parseFloat(av); bv = parseFloat(bv); }
+    if (typeof av === "number") return currentSort.asc ? av - bv : bv - av;
+    return currentSort.asc ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+  });
+
+  const highlightTickers = activeStep !== null ? ROTATION[activeStep].tickers : [];
+  const stepColor = activeStep !== null ? ROTATION[activeStep].color : null;
+
+  const tbody = document.getElementById("stockTable");
+  tbody.innerHTML = "";
+
+  sorted.forEach((s, i) => {
+    const isHL = highlightTickers.includes(s.ticker);
+    const tr = document.createElement("tr");
+    if (i % 2 === 0) tr.classList.add("even");
+    if (isHL) {
+      tr.classList.add("highlighted");
+      tr.style.borderLeftColor = stepColor;
+      tr.style.background = stepColor + "18";
+    }
+
+    tr.innerHTML = `
+      <td class="td-ticker" style="color:${isHL ? stepColor : '#e2e8f0'}">${s.ticker}</td>
+      <td class="td-name">${s.name}</td>
+      <td class="td-div">$${s.qDiv.toFixed(4)}</td>
+      <td class="td-yield">${s.yield}</td>
+      <td class="td-date">${s.exDiv}</td>
+      <td class="td-date">${s.payDate}</td>
+      <td class="td-sector"><span>${s.sector}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Initial render
+recalculate();
+renderTable();
+</script>
+
+</body>
+</html>

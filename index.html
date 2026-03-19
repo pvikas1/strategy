@@ -3,241 +3,367 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>10%+ Dividend Capture Strategy — USA &amp; Canada</title>
+<title>Stock Playbook — Dividends, Earnings &amp; Top 50 Picks | USA &amp; Canada</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:linear-gradient(135deg,#0f172a,#1e293b);min-height:100vh;color:#e2e8f0;padding:20px}
-.container{max-width:1020px;margin:0 auto}
-.header{text-align:center;margin-bottom:20px}
-.header h1{font-size:26px;font-weight:800;background:linear-gradient(90deg,#22c55e,#fbbf24,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.header .sub{color:#94a3b8;margin-top:4px;font-size:13px}
-.badge{display:inline-block;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-top:8px}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#080d19;min-height:100vh;color:#e2e8f0;padding:14px;font-size:12px}
+.ctr{max-width:1060px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:14px;padding:16px 0 12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.hdr h1{font-size:26px;font-weight:900;background:linear-gradient(90deg,#22c55e,#f59e0b,#ef4444,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr .sub{color:#475569;margin-top:3px;font-size:11px}
+.badges{margin-top:6px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
+.bdg{padding:2px 8px;border-radius:12px;font-size:9px;font-weight:700;letter-spacing:.4px}
+.bdg-d{background:#22c55e18;color:#4ade80;border:1px solid #22c55e33}
+.bdg-e{background:#f59e0b18;color:#fbbf24;border:1px solid #f59e0b33}
+.bdg-f{background:#3b82f618;color:#60a5fa;border:1px solid #3b82f633}
 
-.tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(255,255,255,0.05);border-radius:12px;padding:4px}
-.tab{flex:1;padding:11px 16px;text-align:center;border-radius:10px;cursor:pointer;font-weight:700;font-size:14px;transition:all 0.2s;color:#94a3b8;border:1px solid transparent}
-.tab:hover{color:#e2e8f0;background:rgba(255,255,255,0.05)}
-.tab.active-ca{background:linear-gradient(135deg,#dc2626,#fff,#dc2626);color:#0f172a}
-.tab.active-us{background:linear-gradient(135deg,#1e40af,#fff,#dc2626);color:#0f172a}
-.tab .flag{font-size:20px;margin-right:6px;vertical-align:middle}
-.tab-panel{display:none}.tab-panel.active{display:block}
+.ctabs{display:flex;gap:2px;background:rgba(255,255,255,0.025);border-radius:8px 8px 0 0;padding:2px}
+.ctab{flex:1;padding:9px;text-align:center;border-radius:6px;cursor:pointer;font-weight:700;font-size:12px;transition:all .15s;color:#334155}
+.ctab:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
+.ctab.on-ca{background:linear-gradient(135deg,#dc2626,#fff,#dc2626);color:#0f172a}
+.ctab.on-us{background:linear-gradient(135deg,#1e40af,#fff,#dc2626);color:#0f172a}
+.fl{font-size:16px;margin-right:3px;vertical-align:middle}
 
-.capital-box{background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.capital-box label{font-size:12px;color:#94a3b8;display:block;margin-bottom:3px}
-.capital-box input{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px 12px;color:#e2e8f0;font-size:16px;font-weight:700;width:160px;outline:none}
-.capital-box input:focus{border-color:#3b82f6}
-.cr{flex:1;text-align:right}.cr .l{font-size:12px;color:#94a3b8}.cr .a{font-size:24px;font-weight:800;color:#22c55e}.cr .p{font-size:12px;color:#94a3b8}
+.stabs{display:flex;gap:2px;background:rgba(255,255,255,0.025);border-radius:0 0 8px 8px;padding:2px;margin-bottom:14px}
+.stab{flex:1;padding:8px 4px;text-align:center;border-radius:6px;cursor:pointer;font-weight:600;font-size:11px;transition:all .15s;color:#334155}
+.stab:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
+.stab.on{background:rgba(255,255,255,0.07);color:#f8fafc;border:1px solid rgba(255,255,255,0.1)}
+.stab .ic{font-size:12px;margin-right:2px}
 
-.warn{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:10px;padding:12px;margin-bottom:16px;font-size:11px;color:#fbbf24}
-.warn strong{font-size:12px}
-.warn ul{margin:4px 0 0 16px;line-height:1.6}
+.pnl{display:none}.pnl.on{display:block}
+.cap-box{background:rgba(255,255,255,0.03);border-radius:8px;padding:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cap-box label{font-size:10px;color:#475569;display:block;margin-bottom:2px}
+.cap-box input{background:#080d19;border:1px solid #1e293b;border-radius:5px;padding:6px 8px;color:#e2e8f0;font-size:14px;font-weight:700;width:140px;outline:none}
+.cr{flex:1;text-align:right}.cr .l{font-size:10px;color:#475569}.cr .a{font-size:20px;font-weight:800;color:#22c55e}.cr .p{font-size:10px;color:#475569}
 
-h2{font-size:16px;font-weight:700;color:#f8fafc;margin-bottom:12px}
-.type-label{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;margin-left:8px}
-.type-stock{background:#3b82f622;color:#60a5fa;border:1px solid #3b82f644}
-.type-etf{background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b44}
+.warn{border-radius:7px;padding:8px 10px;margin-bottom:10px;font-size:9px;line-height:1.4}
+.warn-y{background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);color:#fbbf24}
+.warn-r{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.15);color:#fca5a5}
+.warn-b{background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);color:#93c5fd}
+.warn strong{font-size:10px}.warn ul{margin:2px 0 0 12px}
 
-.steps{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.step{background:rgba(255,255,255,0.03);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.08);cursor:pointer;transition:all 0.2s}
-.step:hover{background:rgba(255,255,255,0.06)}
-.step.active{background:rgba(255,255,255,0.08)}
-.sh{display:flex;align-items:center;gap:10px}
-.sn{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
-.si{flex:1}.st{font-weight:700;font-size:13px;color:#f8fafc}.sa{font-size:11px;color:#94a3b8;margin-top:1px}
-.stags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
-.stag{padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
-.sd{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);font-size:11px;color:#cbd5e1;line-height:1.5;display:none}
+h2{font-size:14px;font-weight:700;color:#f8fafc;margin-bottom:8px}
+.steps{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.step{background:rgba(255,255,255,0.015);border-radius:7px;padding:9px;border:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:all .12s}
+.step:hover{background:rgba(255,255,255,0.035)}
+.step.active{background:rgba(255,255,255,0.05)}
+.sh{display:flex;align-items:center;gap:7px}
+.sn{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#fff;flex-shrink:0}
+.si{flex:1}.st{font-weight:700;font-size:11px;color:#f8fafc}.sa{font-size:9px;color:#475569;margin-top:1px}
+.stags{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+.stag{padding:1px 4px;border-radius:3px;font-size:8px;font-weight:700}
+.sd{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.05);font-size:9px;color:#94a3b8;line-height:1.4;display:none}
 .step.active .sd{display:block}
-.se{margin-top:4px}.se strong{color:#f8fafc}.se .v{color:#22c55e;font-weight:700}
+.tip{margin-top:3px;padding:3px 5px;background:rgba(34,197,94,0.06);border-radius:3px;border:1px solid rgba(34,197,94,0.12);color:#86efac;font-size:8px}
+.se{margin-top:3px}.se strong{color:#cbd5e1;font-size:9px}.se .v{color:#22c55e;font-weight:700}
 
-.tn{font-size:11px;color:#94a3b8;margin-bottom:8px}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:11px}
-thead tr{border-bottom:2px solid #334155}
-th{padding:7px 5px;text-align:left;color:#94a3b8;cursor:pointer;font-weight:600;white-space:nowrap;user-select:none;font-size:11px}
+.tn{font-size:9px;color:#475569;margin-bottom:5px}
+.tw{overflow-x:auto;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:10px}
+thead tr{border-bottom:1px solid #1e293b}
+th{padding:5px 3px;text-align:left;color:#334155;cursor:pointer;font-weight:600;white-space:nowrap;user-select:none;font-size:9px}
 th:hover{color:#e2e8f0}
-td{padding:7px 5px;transition:all 0.15s}
-tr.ev{background:rgba(255,255,255,0.02)}
-tr.hl{border-left:3px solid}
-.tt{font-weight:700}.tn2{color:#cbd5e1}.td{font-weight:700;color:#22c55e}.ty{color:#fbbf24}.tdt{color:#94a3b8}
-.ts span{background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px;font-size:10px}
-.ttype{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px}
-.ttype-stock{background:#3b82f618;color:#60a5fa}.ttype-etf{background:#f59e0b18;color:#fbbf24}
+td{padding:5px 3px}
+tr.ev{background:rgba(255,255,255,0.01)}
+tr.hl{border-left:2px solid}
+.tt{font-weight:700}.tn2{color:#94a3b8}
+.td{font-weight:700;color:#22c55e}.ty{color:#fbbf24}
+.ts span{background:rgba(255,255,255,0.04);padding:1px 3px;border-radius:2px;font-size:8px}
+.ttype{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px}
+.ttype-stock{background:#3b82f610;color:#60a5fa}.ttype-etf{background:#f59e0b10;color:#fbbf24}
+.beat{color:#22c55e;font-weight:600}.miss{color:#ef4444;font-weight:600}
+.bull{color:#22c55e}.bear{color:#ef4444}
 
-.footer{margin-top:24px;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.06);font-size:10px;color:#64748b;line-height:1.6}
-.footer strong{color:#94a3b8}
+/* Sector filter for Top 50 */
+.filters{margin-bottom:8px;display:flex;gap:3px;flex-wrap:wrap}
+.fbtn{padding:3px 8px;border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);color:#64748b;transition:all .12s}
+.fbtn:hover,.fbtn.on{background:rgba(255,255,255,0.08);color:#f8fafc;border-color:rgba(255,255,255,0.15)}
 
-@media(max-width:640px){.capital-box{flex-direction:column;align-items:stretch}.cr{text-align:left}.sh{flex-wrap:wrap}.stags{justify-content:flex-start;margin-top:4px}}
+.footer{margin-top:18px;padding:8px;background:rgba(255,255,255,0.015);border-radius:6px;border:1px solid rgba(255,255,255,0.03);font-size:8px;color:#1e293b;line-height:1.4}
+.footer strong{color:#475569}
+
+@media(max-width:640px){.cap-box{flex-direction:column;align-items:stretch}.cr{text-align:left}.sh{flex-wrap:wrap}.stags{justify-content:flex-start;margin-top:2px}}
 </style>
 </head>
 <body>
-<div class="container">
-<div class="header">
-  <h1>Dividend Capture Strategy</h1>
-  <p class="sub">Stocks + High-Yield ETFs — Rotate capital for maximum income</p>
-  <span class="badge">TARGET: 10%+ ANNUALIZED YIELD</span>
+<div class="ctr">
+<div class="hdr">
+  <h1>Stock Playbook</h1>
+  <p class="sub">Dividend Capture + Earnings Rotation + Top 50 Fundamental Picks — USA &amp; Canada</p>
+  <div class="badges"><span class="bdg bdg-d">&#128176; DIVIDENDS</span><span class="bdg bdg-e">&#128200; EARNINGS</span><span class="bdg bdg-f">&#11088; TOP 50 PICKS</span></div>
+</div>
+<div class="ctabs">
+  <div class="ctab on-ca" id="cCA" onclick="sc('ca')"><span class="fl">&#127464;&#127462;</span>Canada</div>
+  <div class="ctab" id="cUS" onclick="sc('us')"><span class="fl">&#127482;&#127480;</span>USA</div>
+</div>
+<div class="stabs">
+  <div class="stab on" id="sD" onclick="ss('div')"><span class="ic">&#128176;</span>Dividend Capture</div>
+  <div class="stab" id="sE" onclick="ss('earn')"><span class="ic">&#128200;</span>Earnings Rotation</div>
+  <div class="stab" id="sF" onclick="ss('fund')"><span class="ic">&#11088;</span>Top 50 Fundamentals</div>
 </div>
 
-<div class="tabs">
-  <div class="tab active-ca" id="tabCA" onclick="switchTab('ca')"><span class="flag">&#127464;&#127462;</span>Canada (TSX)</div>
-  <div class="tab" id="tabUS" onclick="switchTab('us')"><span class="flag">&#127482;&#127480;</span>USA (NYSE/NASDAQ)</div>
-</div>
-
-<!-- CANADA -->
-<div class="tab-panel active" id="panelCA">
-  <div class="capital-box">
-    <div><label>Starting Capital (C$)</label><input type="number" id="capCA" value="50000" oninput="recalc('ca')"></div>
-    <div class="cr"><div class="l">Est. Total Dividends (6 rotations)</div><div class="a" id="totalCA">$0</div><div class="p" id="pctCA"></div></div>
-  </div>
-  <div class="warn"><strong>&#9888;&#65039; Key Risks:</strong><ul>
-    <li>Stocks drop by ~dividend amount on ex-date; ETF NAV can erode over time</li>
-    <li>Covered call ETFs <strong>cap upside</strong> in bull markets; use leverage (1.25x) amplifying downside</li>
-    <li>CRA may reclassify frequent trading as business income; ETF distributions may include return of capital</li>
-    <li>Current market volatility (Iran conflict) can dwarf dividend amounts in a single day</li>
-  </ul></div>
-  <h2>6-Step Rotation Plan (Feb &rarr; May 2026) <span class="type-label type-stock">STOCKS</span><span class="type-label type-etf">ETFs</span></h2>
-  <div class="steps" id="stepsCA"></div>
-  <h2>Full Reference Table</h2>
-  <p class="tn">Click headers to sort. Highlighted rows match selected step. <span class="ttype ttype-etf">ETF</span> = monthly payer / high-yield fund.</p>
-  <div class="tw"><table><thead><tr id="thCA"></tr></thead><tbody id="tbCA"></tbody></table></div>
-</div>
-
-<!-- USA -->
-<div class="tab-panel" id="panelUS">
-  <div class="capital-box">
-    <div><label>Starting Capital (US$)</label><input type="number" id="capUS" value="50000" oninput="recalc('us')"></div>
-    <div class="cr"><div class="l">Est. Total Dividends (6 rotations)</div><div class="a" id="totalUS">$0</div><div class="p" id="pctUS"></div></div>
-  </div>
-  <div class="warn"><strong>&#9888;&#65039; Key Risks:</strong><ul>
-    <li>Stocks drop by ~dividend amount on ex-date; covered call ETFs cap upside</li>
-    <li>JEPQ/JEPI use equity-linked notes (ELN) — carry counterparty risk and generate ordinary income (taxed higher)</li>
-    <li>15% US withholding tax for Canadian residents (reduced in RRSP); currency risk on CAD/USD</li>
-    <li>YieldMax/single-stock ETFs have extreme NAV erosion risk — use cautiously</li>
-  </ul></div>
-  <h2>6-Step Rotation Plan (Jan &rarr; May 2026) <span class="type-label type-stock">STOCKS</span><span class="type-label type-etf">ETFs</span></h2>
-  <div class="steps" id="stepsUS"></div>
-  <h2>Full Reference Table</h2>
-  <p class="tn">Click headers to sort. <span class="ttype ttype-etf">ETF</span> = monthly/high-yield covered call fund.</p>
-  <div class="tw"><table><thead><tr id="thUS"></tr></thead><tbody id="tbUS"></tbody></table></div>
-</div>
+<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div>
+<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div>
 
 <div class="footer">
-  <strong>Disclaimer:</strong> For informational purposes only — not financial advice. Ex-dividend dates are approximate. Covered call ETFs trade upside for income and may experience NAV erosion. High yields are not guaranteed and often come from return of capital. Past distributions do not guarantee future payments. Always verify dates with your broker. Consult a qualified financial advisor and tax professional before trading.
+  <strong>Disclaimer:</strong> For informational purposes only — <strong>not financial advice</strong>. All dates approximate. Stocks can drop on ex-dates and after earnings. Covered call ETFs cap upside. CRA/IRS tax implications apply. 15% US withholding for CDN residents. Analyst ratings & targets change frequently. Past performance ≠ future results. Verify all data with your broker. Consult a financial advisor.
 </div>
 </div>
 
 <script>
+/* ═══════ COMPACT DATA ═══════ */
 const D={
-ca:{currency:"C$",stocks:[
-  {ticker:"HDIV",name:"Hamilton Enh. Canadian CC",qDiv:0.183,exDiv:"Monthly ~27th",payDate:"Monthly ~6th",yield:"10.5%",sector:"Covered Call",type:"etf"},
-  {ticker:"HYLD",name:"Hamilton Enh. U.S. CC (CAD)",qDiv:0.17,exDiv:"Monthly ~27th",payDate:"Monthly ~6th",yield:"12.6%",sector:"Covered Call",type:"etf"},
-  {ticker:"ZWC",name:"BMO CDN High Div CC",qDiv:0.11,exDiv:"Monthly ~28th",payDate:"Monthly ~6th",yield:"7.8%",sector:"Covered Call",type:"etf"},
-  {ticker:"HMAX",name:"Hamilton CDN Financials Yield Max",qDiv:0.165,exDiv:"Monthly ~27th",payDate:"Monthly ~6th",yield:"13.0%",sector:"Covered Call",type:"etf"},
-  {ticker:"ENB",name:"Enbridge",qDiv:0.97,exDiv:"~Feb 14",payDate:"Mar 1",yield:"6.5%",sector:"Energy Infra",type:"stock"},
-  {ticker:"SLF",name:"Sun Life",qDiv:0.92,exDiv:"~Feb 25",payDate:"Mar 31",yield:"5.2%",sector:"Insurance",type:"stock"},
-  {ticker:"GWO",name:"Great-West Lifeco",qDiv:0.67,exDiv:"~Mar 3",payDate:"Mar 31",yield:"4.1%",sector:"Insurance",type:"stock"},
-  {ticker:"MFC",name:"Manulife",qDiv:0.44,exDiv:"~Feb 24",payDate:"Mar 19",yield:"4.3%",sector:"Insurance",type:"stock"},
-  {ticker:"CM",name:"CIBC",qDiv:1.07,exDiv:"~Mar 27",payDate:"Apr 28",yield:"4.8%",sector:"Bank",type:"stock"},
-  {ticker:"BNS",name:"Scotiabank",qDiv:1.06,exDiv:"~Apr 1",payDate:"Apr 28",yield:"5.6%",sector:"Bank",type:"stock"},
-  {ticker:"BMO",name:"Bank of Montreal",qDiv:1.55,exDiv:"~Apr 30",payDate:"May 26",yield:"4.7%",sector:"Bank",type:"stock"},
-  {ticker:"RY",name:"Royal Bank",qDiv:1.64,exDiv:"~Apr 23",payDate:"May 22",yield:"2.9%",sector:"Bank",type:"stock"},
-  {ticker:"TD",name:"TD Bank",qDiv:1.08,exDiv:"~Apr 9",payDate:"Apr 30",yield:"4.7%",sector:"Bank",type:"stock"},
-  {ticker:"TRP",name:"TC Energy",qDiv:1.02,exDiv:"~Mar 30",payDate:"Apr 30",yield:"5.8%",sector:"Energy Infra",type:"stock"},
-  {ticker:"BCE",name:"BCE Inc",qDiv:0.4988,exDiv:"~Mar 13",payDate:"Apr 15",yield:"11.8%",sector:"Telecom",type:"stock"},
-  {ticker:"T",name:"TELUS",qDiv:0.4023,exDiv:"~Mar 10",payDate:"Apr 1",yield:"7.5%",sector:"Telecom",type:"stock"},
-  {ticker:"CNQ",name:"Canadian Natural",qDiv:0.5625,exDiv:"~Mar 18",payDate:"Apr 2",yield:"4.0%",sector:"Energy",type:"stock"},
-  {ticker:"POW",name:"Power Corp",qDiv:0.6675,exDiv:"~Mar 11",payDate:"May 1",yield:"4.0%",sector:"Financial",type:"stock"},
-  {ticker:"IGM",name:"IGM Financial",qDiv:0.62,exDiv:"~Mar 23",payDate:"Apr 30",yield:"3.9%",sector:"Asset Mgmt",type:"stock"},
+"ca-div":{type:"div",currency:"C$",capId:"cc1",totalId:"tt1",pctId:"pp1",stocks:[
+{ticker:"HDIV",name:"Hamilton Enh CDN CC",qDiv:.183,exDiv:"Monthly",payDate:"Monthly",yield:"10.5%",sector:"CC ETF",type:"etf"},
+{ticker:"HYLD",name:"Hamilton Enh US CC",qDiv:.17,exDiv:"Monthly",payDate:"Monthly",yield:"12.6%",sector:"CC ETF",type:"etf"},
+{ticker:"HMAX",name:"Hamilton Fin YieldMax",qDiv:.165,exDiv:"Monthly",payDate:"Monthly",yield:"13.0%",sector:"CC ETF",type:"etf"},
+{ticker:"ENB",name:"Enbridge",qDiv:.97,exDiv:"~Feb 14",payDate:"Mar 1",yield:"6.5%",sector:"Energy Infra",type:"stock"},
+{ticker:"SLF",name:"Sun Life",qDiv:.92,exDiv:"~Feb 25",payDate:"Mar 31",yield:"5.2%",sector:"Insurance",type:"stock"},
+{ticker:"GWO",name:"Great-West Lifeco",qDiv:.67,exDiv:"~Mar 3",payDate:"Mar 31",yield:"4.1%",sector:"Insurance",type:"stock"},
+{ticker:"CM",name:"CIBC",qDiv:1.07,exDiv:"~Mar 27",payDate:"Apr 28",yield:"4.8%",sector:"Bank",type:"stock"},
+{ticker:"BNS",name:"Scotiabank",qDiv:1.06,exDiv:"~Apr 1",payDate:"Apr 28",yield:"5.6%",sector:"Bank",type:"stock"},
+{ticker:"BMO",name:"Bank of Montreal",qDiv:1.55,exDiv:"~Apr 30",payDate:"May 26",yield:"4.7%",sector:"Bank",type:"stock"},
+{ticker:"RY",name:"Royal Bank",qDiv:1.64,exDiv:"~Apr 23",payDate:"May 22",yield:"2.9%",sector:"Bank",type:"stock"},
+{ticker:"TD",name:"TD Bank",qDiv:1.08,exDiv:"~Apr 9",payDate:"Apr 30",yield:"4.7%",sector:"Bank",type:"stock"},
+{ticker:"TRP",name:"TC Energy",qDiv:1.02,exDiv:"~Mar 30",payDate:"Apr 30",yield:"5.8%",sector:"Energy Infra",type:"stock"},
+{ticker:"BCE",name:"BCE Inc",qDiv:.499,exDiv:"~Mar 13",payDate:"Apr 15",yield:"11.8%",sector:"Telecom",type:"stock"},
+{ticker:"CNQ",name:"Canadian Natural",qDiv:.563,exDiv:"~Mar 18",payDate:"Apr 2",yield:"4.0%",sector:"Energy",type:"stock"},
+{ticker:"POW",name:"Power Corp",qDiv:.668,exDiv:"~Mar 11",payDate:"May 1",yield:"4.0%",sector:"Financial",type:"stock"},
 ],rotation:[
-  {step:1,title:"Base: Monthly ETFs (Hold Always)",action:"Park 40% of capital in HDIV + HYLD + HMAX for ~10-13% yield monthly",detail:"These ETFs pay monthly. Hold them continuously as your income base. They use covered calls + 1.25x leverage on Canadian/US equities. HDIV yields ~10.5%, HYLD ~12.6%, HMAX ~13%. This alone can hit your 10% target.",tickers:["HDIV","HYLD","HMAX"],color:"#f59e0b"},
-  {step:2,title:"Late Feb \u2192 Early Mar",action:"Use 60% for rotation: Buy ENB, SLF, GWO, MFC",detail:"These go ex-dividend late Feb / early Mar. Capture dividends then rotate.",tickers:["ENB","SLF","GWO","MFC"],color:"#22c55e"},
-  {step:3,title:"Early\u2013Mid March",action:"Sell \u2192 Rotate into BCE, T, CNQ, POW",detail:"Mid-March ex-dates. BCE yields 11.8% and TELUS 7.5% — high yield picks.",tickers:["BCE","T","CNQ","POW"],color:"#3b82f6"},
-  {step:4,title:"Late March",action:"Sell \u2192 Rotate into CM, TRP, IGM",detail:"CIBC ($1.07), TC Energy ($1.02), and IGM go ex-div late March.",tickers:["CM","TRP","IGM"],color:"#a855f7"},
-  {step:5,title:"Early April",action:"Sell \u2192 Rotate into BNS, TD",detail:"Scotiabank and TD go ex-dividend early April.",tickers:["BNS","TD"],color:"#ef4444"},
-  {step:6,title:"Mid\u2013Late April",action:"Sell \u2192 Rotate into RY, BMO (highest $/share)",detail:"Royal Bank ($1.64) and BMO ($1.55) — biggest per-share payouts on TSX. After this, cycle restarts or park back in monthly ETFs.",tickers:["RY","BMO"],color:"#06b6d4"},
+{step:1,title:"Base: Monthly ETFs",action:"40% in HDIV+HYLD+HMAX ~10-13%",tickers:["HDIV","HYLD","HMAX"],color:"#f59e0b",detail:"Hold continuously for monthly income base."},
+{step:2,title:"Late Feb\u2192Early Mar",action:"60% rotate: ENB,SLF,GWO",tickers:["ENB","SLF","GWO"],color:"#22c55e",detail:"Ex-div late Feb/early Mar."},
+{step:3,title:"Mid March",action:"Sell\u2192BCE,CNQ,POW",tickers:["BCE","CNQ","POW"],color:"#3b82f6",detail:"Mid-March ex-dates."},
+{step:4,title:"Late Mar\u2192Early Apr",action:"Sell\u2192CM,TRP,BNS,TD",tickers:["CM","TRP","BNS","TD"],color:"#a855f7",detail:"Late March/early April ex-dates."},
+{step:5,title:"Mid\u2013Late April",action:"Sell\u2192RY($1.64),BMO($1.55)",tickers:["RY","BMO"],color:"#ef4444",detail:"Highest per-share payouts on TSX."},
 ]},
-us:{currency:"US$",stocks:[
-  {ticker:"JEPQ",name:"JPMorgan Nasdaq Eq Premium",qDiv:0.48,exDiv:"Monthly ~1st",payDate:"Monthly ~6th",yield:"11.4%",sector:"Covered Call",type:"etf"},
-  {ticker:"JEPI",name:"JPMorgan Eq Premium Income",qDiv:0.38,exDiv:"Monthly ~1st",payDate:"Monthly ~6th",yield:"8.1%",sector:"Covered Call",type:"etf"},
-  {ticker:"QYLD",name:"Global X Nasdaq 100 CC",qDiv:0.18,exDiv:"Monthly ~21st",payDate:"Monthly ~28th",yield:"10.8%",sector:"Covered Call",type:"etf"},
-  {ticker:"XYLD",name:"Global X S&P 500 CC",qDiv:0.37,exDiv:"Monthly ~21st",payDate:"Monthly ~28th",yield:"9.5%",sector:"Covered Call",type:"etf"},
-  {ticker:"DIVO",name:"Amplify CWP Enh Dividend",qDiv:0.30,exDiv:"Monthly ~21st",payDate:"Monthly ~28th",yield:"4.5%",sector:"Covered Call",type:"etf"},
-  {ticker:"O",name:"Realty Income",qDiv:0.268,exDiv:"Monthly",payDate:"Monthly",yield:"5.8%",sector:"REIT",type:"etf"},
-  {ticker:"MAIN",name:"Main Street Capital",qDiv:0.245,exDiv:"Monthly",payDate:"Monthly",yield:"5.2%",sector:"BDC",type:"etf"},
-  {ticker:"XOM",name:"Exxon Mobil",qDiv:1.03,exDiv:"~Feb 12",payDate:"Mar 10",yield:"2.7%",sector:"Energy",type:"stock"},
-  {ticker:"CVX",name:"Chevron",qDiv:1.71,exDiv:"~Feb 14",payDate:"Mar 10",yield:"4.1%",sector:"Energy",type:"stock"},
-  {ticker:"ABBV",name:"AbbVie",qDiv:1.73,exDiv:"~Apr 15",payDate:"May 15",yield:"3.1%",sector:"Pharma",type:"stock"},
-  {ticker:"JPM",name:"JPMorgan Chase",qDiv:1.40,exDiv:"~Apr 6",payDate:"Apr 30",yield:"2.1%",sector:"Bank",type:"stock"},
-  {ticker:"PEP",name:"PepsiCo",qDiv:1.355,exDiv:"~Mar 6",payDate:"Mar 31",yield:"3.4%",sector:"Consumer",type:"stock"},
-  {ticker:"IBM",name:"IBM",qDiv:1.67,exDiv:"~Feb 7",payDate:"Mar 10",yield:"2.5%",sector:"Tech",type:"stock"},
-  {ticker:"KO",name:"Coca-Cola",qDiv:0.515,exDiv:"~Mar 13",payDate:"Apr 1",yield:"2.7%",sector:"Consumer",type:"stock"},
-  {ticker:"MO",name:"Altria Group",qDiv:1.02,exDiv:"~Mar 24",payDate:"Apr 10",yield:"6.8%",sector:"Consumer",type:"stock"},
-  {ticker:"VZ",name:"Verizon",qDiv:0.6775,exDiv:"~Apr 9",payDate:"May 1",yield:"5.8%",sector:"Telecom",type:"stock"},
-  {ticker:"T.US",name:"AT&T",qDiv:0.2775,exDiv:"~Apr 9",payDate:"May 1",yield:"4.0%",sector:"Telecom",type:"stock"},
-  {ticker:"PG",name:"Procter & Gamble",qDiv:1.0568,exDiv:"~Apr 23",payDate:"May 15",yield:"2.8%",sector:"Consumer",type:"stock"},
-  {ticker:"JNJ",name:"Johnson & Johnson",qDiv:1.30,exDiv:"~Feb 24",payDate:"Mar 11",yield:"2.1%",sector:"Healthcare",type:"stock"},
-  {ticker:"EPD",name:"Enterprise Products",qDiv:0.55,exDiv:"~Apr 30",payDate:"May 13",yield:"5.9%",sector:"Energy Infra",type:"stock"},
-  {ticker:"PFE",name:"Pfizer",qDiv:0.43,exDiv:"~Jan 23",payDate:"Mar 6",yield:"6.5%",sector:"Pharma",type:"stock"},
+"us-div":{type:"div",currency:"US$",capId:"cc2",totalId:"tt2",pctId:"pp2",stocks:[
+{ticker:"JEPQ",name:"JPMorgan Nasdaq CC",qDiv:.48,exDiv:"Monthly",payDate:"Monthly",yield:"11.4%",sector:"CC ETF",type:"etf"},
+{ticker:"JEPI",name:"JPMorgan Eq Premium",qDiv:.38,exDiv:"Monthly",payDate:"Monthly",yield:"8.1%",sector:"CC ETF",type:"etf"},
+{ticker:"QYLD",name:"Global X Nasdaq CC",qDiv:.18,exDiv:"Monthly",payDate:"Monthly",yield:"10.8%",sector:"CC ETF",type:"etf"},
+{ticker:"O",name:"Realty Income",qDiv:.268,exDiv:"Monthly",payDate:"Monthly",yield:"5.8%",sector:"REIT",type:"etf"},
+{ticker:"XOM",name:"Exxon Mobil",qDiv:1.03,exDiv:"~Feb 12",payDate:"Mar 10",yield:"2.7%",sector:"Energy",type:"stock"},
+{ticker:"CVX",name:"Chevron",qDiv:1.71,exDiv:"~Feb 14",payDate:"Mar 10",yield:"4.1%",sector:"Energy",type:"stock"},
+{ticker:"ABBV",name:"AbbVie",qDiv:1.73,exDiv:"~Apr 15",payDate:"May 15",yield:"3.1%",sector:"Pharma",type:"stock"},
+{ticker:"JPM",name:"JPMorgan Chase",qDiv:1.40,exDiv:"~Apr 6",payDate:"Apr 30",yield:"2.1%",sector:"Bank",type:"stock"},
+{ticker:"PEP",name:"PepsiCo",qDiv:1.355,exDiv:"~Mar 6",payDate:"Mar 31",yield:"3.4%",sector:"Consumer",type:"stock"},
+{ticker:"MO",name:"Altria Group",qDiv:1.02,exDiv:"~Mar 24",payDate:"Apr 10",yield:"6.8%",sector:"Consumer",type:"stock"},
+{ticker:"VZ",name:"Verizon",qDiv:.678,exDiv:"~Apr 9",payDate:"May 1",yield:"5.8%",sector:"Telecom",type:"stock"},
+{ticker:"PG",name:"Procter & Gamble",qDiv:1.057,exDiv:"~Apr 23",payDate:"May 15",yield:"2.8%",sector:"Consumer",type:"stock"},
+{ticker:"EPD",name:"Enterprise Products",qDiv:.55,exDiv:"~Apr 30",payDate:"May 13",yield:"5.9%",sector:"Energy Infra",type:"stock"},
 ],rotation:[
-  {step:1,title:"Base: Monthly ETFs (Hold Always)",action:"Park 40% in JEPQ + JEPI + QYLD for ~8-11% monthly yield",detail:"These ETFs pay monthly using covered call strategies. JEPQ yields ~11.4% (Nasdaq focus), JEPI ~8.1% (S&P 500 blue chips), QYLD ~10.8%. Hold continuously as income base. Add O (Realty Income) and MAIN for diversification.",tickers:["JEPQ","JEPI","QYLD","O","MAIN"],color:"#f59e0b"},
-  {step:2,title:"Late Jan \u2192 Mid Feb",action:"Use 60% for rotation: Buy PFE, WFC/IBM, XOM, CVX, JNJ",detail:"Early-year ex-dividends. Exxon $1.03, Chevron $1.71, IBM $1.67 per share.",tickers:["PFE","IBM","XOM","CVX","JNJ"],color:"#22c55e"},
-  {step:3,title:"Late Feb \u2192 Mid Mar",action:"Sell \u2192 Rotate into PEP, KO, MO",detail:"PepsiCo ($1.355), Coca-Cola, and Altria (6.8% yield) go ex-div early\u2013mid March.",tickers:["PEP","KO","MO"],color:"#3b82f6"},
-  {step:4,title:"Late Mar \u2192 Early Apr",action:"Sell \u2192 Rotate into JPM, VZ, T.US",detail:"JPMorgan ($1.40), Verizon (5.8% yield), AT&T go ex-div early April.",tickers:["JPM","VZ","T.US"],color:"#a855f7"},
-  {step:5,title:"Mid April",action:"Sell \u2192 Rotate into ABBV, PG",detail:"AbbVie ($1.73 \u2014 highest per-share!) and P&G. Both are Dividend Aristocrats.",tickers:["ABBV","PG"],color:"#ef4444"},
-  {step:6,title:"Late April \u2192 May",action:"Sell \u2192 Rotate into EPD, then park in monthly ETFs",detail:"Enterprise Products ($0.55, 5.9% yield) goes ex-div late April. After this, park back in JEPQ/JEPI/QYLD for continuous monthly income.",tickers:["EPD"],color:"#06b6d4"},
-]}};
+{step:1,title:"Base: Monthly ETFs",action:"40% in JEPQ+JEPI+QYLD+O ~8-11%",tickers:["JEPQ","JEPI","QYLD","O"],color:"#f59e0b",detail:"Monthly CC ETFs + REIT."},
+{step:2,title:"Late Jan\u2192Mid Feb",action:"60%: XOM,CVX",tickers:["XOM","CVX"],color:"#22c55e",detail:"Early year energy ex-divs."},
+{step:3,title:"Late Feb\u2192Mid Mar",action:"Sell\u2192PEP,MO",tickers:["PEP","MO"],color:"#3b82f6",detail:"March ex-dates. MO 6.8% yield."},
+{step:4,title:"Late Mar\u2192Apr",action:"Sell\u2192JPM,VZ,ABBV,PG",tickers:["JPM","VZ","ABBV","PG"],color:"#a855f7",detail:"April ex-dates. ABBV $1.73/share."},
+{step:5,title:"Late April",action:"Sell\u2192EPD",tickers:["EPD"],color:"#ef4444",detail:"Late April. Then park in monthly ETFs."},
+]},
+"ca-earn":{type:"earn",stocks:[
+{ticker:"MFC",name:"Manulife",sector:"Insurance",lastEPS:"$1.01",lastResult:"beat",avgMove:"3%",nextDate:"~May 6",streak:"Beat 7/8",strategy:"Asia growth"},
+{ticker:"SLF",name:"Sun Life",sector:"Insurance",lastEPS:"$1.72",lastResult:"beat",avgMove:"2.5%",nextDate:"~May 6",streak:"Beat 6/8",strategy:"MFS diversification"},
+{ticker:"GWO",name:"Great-West",sector:"Insurance",lastEPS:"$1.36",lastResult:"beat",avgMove:"2%",nextDate:"~May 6",streak:"Beat 6/8",strategy:"Empower US growth"},
+{ticker:"CNQ",name:"Cdn Natural",sector:"Energy",lastEPS:"$0.86",lastResult:"beat",avgMove:"4%",nextDate:"~May 7",streak:"Beat 6/8",strategy:"OIL BOOM $97 WTI!"},
+{ticker:"SU",name:"Suncor",sector:"Energy",lastEPS:"$1.12",lastResult:"beat",avgMove:"4.5%",nextDate:"~May 6",streak:"Beat 5/8",strategy:"Oil boom + buybacks"},
+{ticker:"SHOP",name:"Shopify",sector:"Tech",lastEPS:"$0.44",lastResult:"beat",avgMove:"8%",nextDate:"~May 6",streak:"Beat 7/8",strategy:"Highest vol TSX; \u00b18%"},
+{ticker:"RY",name:"Royal Bank",sector:"Bank",lastEPS:"$3.14",lastResult:"beat",avgMove:"2.5%",nextDate:"~May 28",streak:"Beat 7/8",strategy:"Most consistent beater"},
+{ticker:"TD",name:"TD Bank",sector:"Bank",lastEPS:"$2.18",lastResult:"beat",avgMove:"3%",nextDate:"~May 28",streak:"Beat 5/8",strategy:"Recovery play"},
+{ticker:"BMO",name:"Bank of Montreal",sector:"Bank",lastEPS:"$3.04",lastResult:"beat",avgMove:"3%",nextDate:"~May 27",streak:"Beat 6/8",strategy:"US expansion"},
+{ticker:"BNS",name:"Scotiabank",sector:"Bank",lastEPS:"$1.65",lastResult:"beat",avgMove:"3.5%",nextDate:"~May 26",streak:"Beat 5/8",strategy:"LatAm exposure"},
+{ticker:"CM",name:"CIBC",sector:"Bank",lastEPS:"$2.20",lastResult:"beat",avgMove:"3%",nextDate:"~May 28",streak:"Beat 6/8",strategy:"Dividend +10%"},
+{ticker:"NA",name:"National Bank",sector:"Bank",lastEPS:"$3.12",lastResult:"beat",avgMove:"4%",nextDate:"~May 27",streak:"Beat 6/8",strategy:"CWB integration"},
+],rotation:[
+{step:1,title:"Late Apr\u2192Early May",action:"Buy insurers+TRP",tickers:["MFC","SLF","GWO"],color:"#22c55e",detail:"Insurers report first. Consistent beaters."},
+{step:2,title:"First Week May",action:"Sell\u2192SHOP,SU,CNQ",tickers:["SHOP","SU","CNQ"],color:"#3b82f6",detail:"Shopify \u00b18%. Energy oil boom."},
+{step:3,title:"Late May BANK WEEK",action:"ALL IN banks",tickers:["BNS","NA","BMO","RY","TD","CM"],color:"#f59e0b",detail:"Big 6 report May 26-28. BIGGEST TSX week."},
+{step:4,title:"Post-Earnings",action:"Take profits or hold",tickers:[],color:"#64748b",detail:"Park in HDIV/HYLD or dividend rotation."},
+]},
+"us-earn":{type:"earn",stocks:[
+{ticker:"JPM",name:"JPMorgan",sector:"Bank",lastEPS:"$4.81",lastResult:"beat",avgMove:"3%",nextDate:"~Apr 11",streak:"Beat 7/8",strategy:"Bellwether"},
+{ticker:"GS",name:"Goldman Sachs",sector:"Bank",lastEPS:"$11.95",lastResult:"beat",avgMove:"4%",nextDate:"~Apr 14",streak:"Beat 7/8",strategy:"Iran trading vol"},
+{ticker:"NFLX",name:"Netflix",sector:"Streaming",lastEPS:"$5.40",lastResult:"beat",avgMove:"8%",nextDate:"~Apr 17",streak:"Beat 7/8",strategy:"Ad tier growth"},
+{ticker:"TSLA",name:"Tesla",sector:"EV",lastEPS:"$0.73",lastResult:"beat",avgMove:"12%",nextDate:"~Apr 22",streak:"Beat 4/8",strategy:"\u00b112% HIGHEST RISK"},
+{ticker:"AMZN",name:"Amazon",sector:"Tech",lastEPS:"$1.95",lastResult:"miss",avgMove:"6%",nextDate:"~Apr 23",streak:"Beat 6/8",strategy:"AWS rebound"},
+{ticker:"XOM",name:"Exxon Mobil",sector:"Energy",lastEPS:"$1.67",lastResult:"beat",avgMove:"3%",nextDate:"~Apr 25",streak:"Beat 6/8",strategy:"OIL $97! Blowout"},
+{ticker:"MSFT",name:"Microsoft",sector:"Tech",lastEPS:"$4.14",lastResult:"beat",avgMove:"5%",nextDate:"~Apr 29",streak:"Beat 7/8",strategy:"Azure AI"},
+{ticker:"META",name:"Meta",sector:"Tech",lastEPS:"$8.88",lastResult:"beat",avgMove:"7%",nextDate:"~Apr 29",streak:"Beat 8/8",strategy:"8/8 streak!"},
+{ticker:"GOOG",name:"Alphabet",sector:"Tech",lastEPS:"$2.82",lastResult:"beat",avgMove:"6%",nextDate:"~Apr 29",streak:"Beat 7/8",strategy:"Search+Cloud+AI"},
+{ticker:"AAPL",name:"Apple",sector:"Tech",lastEPS:"$2.84",lastResult:"beat",avgMove:"4%",nextDate:"Apr 30",streak:"Beat 8/8",strategy:"8/8 streak!"},
+{ticker:"AMD",name:"AMD",sector:"Semis",lastEPS:"$1.09",lastResult:"beat",avgMove:"7%",nextDate:"~Apr 29",streak:"Beat 6/8",strategy:"AI chip #2"},
+{ticker:"NVDA",name:"NVIDIA",sector:"Semis",lastEPS:"$1.12",lastResult:"beat",avgMove:"10%",nextDate:"May 20",streak:"Beat 8/8",strategy:"AI king \u00b110%"},
+],rotation:[
+{step:1,title:"Apr 6\u201311",action:"JPM first bank",tickers:["JPM"],color:"#22c55e",detail:"Sets tone."},
+{step:2,title:"Apr 14\u201318",action:"GS,NFLX",tickers:["GS","NFLX"],color:"#3b82f6",detail:"Goldman Iran vol. Netflix \u00b18%."},
+{step:3,title:"Apr 21\u201325",action:"TSLA,AMZN,XOM",tickers:["TSLA","AMZN","XOM"],color:"#a855f7",detail:"Tesla \u00b112%. Oil boom."},
+{step:4,title:"Apr 28\u201330 MEGA TECH",action:"AAPL,MSFT,GOOG,META,AMD",tickers:["AAPL","MSFT","GOOG","META","AMD"],color:"#f59e0b",detail:"Biggest week. Apple/Meta 8/8."},
+{step:5,title:"May 20 NVIDIA",action:"Grand finale",tickers:["NVDA"],color:"#ef4444",detail:"\u00b110% avg. AI king."},
+]},
+"ca-fund":{type:"fund",stocks:[
+{ticker:"SHOP",name:"Shopify",sector:"Tech",thesis:"E-commerce leader; AI tools; enterprise growth",catalyst:"Q1 earnings beat; merchant solutions expansion",rating:"Strong Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"CNQ",name:"Canadian Natural",sector:"Energy",thesis:"Low-cost oil producer; massive free cash flow at $97 WTI",catalyst:"Oil boom from Iran conflict; blowout Q1 earnings",rating:"Strong Buy",upside:"30%",timeframe:"3-6mo"},
+{ticker:"SU",name:"Suncor Energy",sector:"Energy",thesis:"Integrated oil; refining margins; aggressive buybacks",catalyst:"$97 WTI; upgraded production; strong balance sheet",rating:"Buy",upside:"25%",timeframe:"3-6mo"},
+{ticker:"CVE",name:"Cenovus Energy",sector:"Energy",thesis:"Oil sands + refining; low breakeven cost",catalyst:"Oil price surge; downstream margins",rating:"Buy",upside:"35%",timeframe:"3-6mo"},
+{ticker:"IMO",name:"Imperial Oil",sector:"Energy",thesis:"XOM subsidiary; dividends + buybacks",catalyst:"$97 oil; Kearl production strong",rating:"Buy",upside:"20%",timeframe:"3-6mo"},
+{ticker:"CCO",name:"Cameco",sector:"Uranium",thesis:"Nuclear renaissance; AI data centre power demand",catalyst:"Global nuclear buildout; supply deficit",rating:"Strong Buy",upside:"30%",timeframe:"6-9mo"},
+{ticker:"AEM",name:"Agnico Eagle",sector:"Gold",thesis:"Premier gold miner; safe haven demand",catalyst:"Gold at all-time highs; Iran war uncertainty",rating:"Buy",upside:"15%",timeframe:"3-6mo"},
+{ticker:"ABX",name:"Barrick Gold",sector:"Gold",thesis:"Global gold/copper miner; undervalued",catalyst:"Gold prices soaring; copper demand from AI/EVs",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"ATD",name:"Couche-Tard",sector:"Consumer",thesis:"Global convenience store king; M&A machine",catalyst:"Seven & i bid; organic growth; fuel margins",rating:"Strong Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"ATZ",name:"Aritzia",sector:"Retail",thesis:"Fast-growing fashion; US expansion",catalyst:"Revenue +23% CAGR; new stores; digital app",rating:"Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"RY",name:"Royal Bank",sector:"Bank",thesis:"Canada's largest bank; most consistent earner",catalyst:"Rate cuts; HSBC Canada integration complete",rating:"Buy",upside:"12%",timeframe:"6-9mo"},
+{ticker:"NA",name:"National Bank",sector:"Bank",thesis:"CWB acquisition; Quebec stronghold",catalyst:"Integration ahead of schedule; ROE +16%",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"MFC",name:"Manulife",sector:"Insurance",thesis:"Asia wealth mgmt; high ROE; buybacks",catalyst:"Asia growth acceleration; dividend raises",rating:"Buy",upside:"18%",timeframe:"6-9mo"},
+{ticker:"ENB",name:"Enbridge",sector:"Midstream",thesis:"Pipeline monopoly; 31 yr dividend streak",catalyst:"Oil volumes up; gas utility earnings stable",rating:"Buy",upside:"10%",timeframe:"6-9mo"},
+{ticker:"TRP",name:"TC Energy",sector:"Midstream",thesis:"Post-spinoff; regulated cash flows",catalyst:"Infrastructure supercycle; rate base growth",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"KEY",name:"Keyera",sector:"Midstream",thesis:"Midstream infrastructure; reliable cash flow",catalyst:"BMO top pick; 5% yield; 17% upside to target",rating:"Buy",upside:"17%",timeframe:"6-9mo"},
+{ticker:"CSU",name:"Constellation Software",sector:"Tech",thesis:"Serial acquirer of vertical market software",catalyst:"Compounding machine; 30%+ CAGR for 20yrs",rating:"Strong Buy",upside:"20%",timeframe:"9mo"},
+{ticker:"EIF",name:"Exchange Income",sector:"Industrial",thesis:"Aviation + manufacturing; monthly dividends",catalyst:"Defence spending increase; acquisitions",rating:"Buy",upside:"18%",timeframe:"6-9mo"},
+{ticker:"CNR",name:"CN Rail",sector:"Transport",thesis:"Railroad duopoly; recovering volumes",catalyst:"Margin expansion; buybacks; defensive value",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"CP",name:"CP Kansas City",sector:"Transport",thesis:"Only single-line rail Canada-US-Mexico",catalyst:"Mexico trade volumes; network optimization",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"FRU",name:"Freehold Royalties",sector:"Energy",thesis:"Royalty model; no operating costs",catalyst:"Oil boom pure play; dividend growth",rating:"Buy",upside:"25%",timeframe:"3-6mo"},
+{ticker:"SES",name:"Secure Energy",sector:"Energy Svcs",thesis:"Waste infrastructure; sticky revenue",catalyst:"Oil activity boom; dividend +5%; P/E 15x",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"GWO",name:"Great-West Lifeco",sector:"Insurance",thesis:"Empower US retirement; record earnings",catalyst:"12% EPS growth; 10% dividend raise; buybacks",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"POW",name:"Power Corp",sector:"Financial",thesis:"NAV discount ~22%; GWO+IGM record results",catalyst:"NAV $85.77 vs price $66; dividend +9%",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"MDI",name:"Major Drilling",sector:"Mining Svcs",thesis:"Contract drilling leader; exploration cycle upturn",catalyst:"Elevated commodity prices; mining capex revival",rating:"Buy",upside:"25%",timeframe:"6-9mo"},
+]},
+"us-fund":{type:"fund",stocks:[
+{ticker:"NVDA",name:"NVIDIA",sector:"Semis",thesis:"AI chip monopoly; data centre demand",catalyst:"$1T semi market in 2026; Blackwell ramp",rating:"Strong Buy",upside:"35%",timeframe:"6-9mo"},
+{ticker:"AVGO",name:"Broadcom",sector:"Semis",thesis:"Custom AI silicon + networking",catalyst:"Custom silicon to double in FY2026; 47% rev growth",rating:"Strong Buy",upside:"30%",timeframe:"6-9mo"},
+{ticker:"MSFT",name:"Microsoft",sector:"Tech",thesis:"Azure AI; Office 365; Copilot monetization",catalyst:"40% Azure growth; mid-teens revenue growth",rating:"Strong Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"AMZN",name:"Amazon",sector:"Tech",thesis:"AWS + retail margins + advertising",catalyst:"AWS reacceleration; cost efficiencies",rating:"Strong Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"META",name:"Meta",sector:"Tech",thesis:"Ad revenue machine; AI integration",catalyst:"Beat 8/8 quarters; Reality Labs improving",rating:"Strong Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"GOOG",name:"Alphabet",sector:"Tech",thesis:"Search moat; Cloud growth; Waymo",catalyst:"AI Overviews monetization; Cloud profitable",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"AAPL",name:"Apple",sector:"Tech",thesis:"Services + iPhone cycle; ecosystem lock-in",catalyst:"Beat 8/8; $143.8B Q1 rev (+16%); India growth",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"MU",name:"Micron",sector:"Semis",thesis:"HBM memory for AI; supply constrained",catalyst:"<6x NTM earnings; DRAM/NAND +20% shipments",rating:"Strong Buy",upside:"40%",timeframe:"6-9mo"},
+{ticker:"AMD",name:"AMD",sector:"Semis",thesis:"AI GPU #2; data centre share gains",catalyst:"MI350 launch; enterprise AI adoption",rating:"Buy",upside:"30%",timeframe:"6-9mo"},
+{ticker:"LRCX",name:"Lam Research",sector:"Semis",thesis:"Wafer fabrication equipment leader",catalyst:"$1T semi cycle; advanced node demand",rating:"Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"XOM",name:"Exxon Mobil",sector:"Energy",thesis:"Oil super-major; $97 WTI windfall",catalyst:"Iran conflict; massive FCF; buybacks accelerate",rating:"Strong Buy",upside:"20%",timeframe:"3-6mo"},
+{ticker:"CVX",name:"Chevron",sector:"Energy",thesis:"Integrated oil; Hess merger synergies",catalyst:"$97 oil; Permian growth; Hess accretion",rating:"Buy",upside:"20%",timeframe:"3-6mo"},
+{ticker:"LLY",name:"Eli Lilly",sector:"Pharma",thesis:"GLP-1 obesity drugs (Mounjaro/Zepbound)",catalyst:"110%+ Mounjaro rev growth; massive TAM",rating:"Strong Buy",upside:"25%",timeframe:"6-9mo"},
+{ticker:"ABBV",name:"AbbVie",sector:"Pharma",thesis:"Post-Humira diversification; Skyrizi/Rinvoq",catalyst:"Dividend aristocrat; new drugs growing 50%+",rating:"Buy",upside:"18%",timeframe:"6-9mo"},
+{ticker:"UNH",name:"UnitedHealth",sector:"Healthcare",thesis:"Healthcare bellwether; Optum growth",catalyst:"Steady compounder; beat 7/8 quarters",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"JPM",name:"JPMorgan Chase",sector:"Bank",thesis:"Best-in-class bank; Dimon leadership",catalyst:"Trading rev from Iran volatility; rate income",rating:"Buy",upside:"12%",timeframe:"6-9mo"},
+{ticker:"GS",name:"Goldman Sachs",sector:"Bank",thesis:"Trading + IB powerhouse",catalyst:"Massive trading volumes from ME conflict",rating:"Buy",upside:"18%",timeframe:"3-6mo"},
+{ticker:"BAC",name:"Bank of America",sector:"Bank",thesis:"Rate sensitive; consumer banking scale",catalyst:"NII expansion; consumer resilience",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"COST",name:"Costco",sector:"Retail",thesis:"Membership model; pricing power; traffic growth",catalyst:"Same-store sales momentum; membership fees up",rating:"Buy",upside:"12%",timeframe:"6-9mo"},
+{ticker:"NFLX",name:"Netflix",sector:"Streaming",thesis:"Content monopoly; ad tier scaling",catalyst:"Subscriber growth; ad revenue ramp; live sports",rating:"Buy",upside:"15%",timeframe:"6-9mo"},
+{ticker:"PLTR",name:"Palantir",sector:"AI/Software",thesis:"AI platform for govt & enterprise",catalyst:"137% US govt rev growth; AIP adoption",rating:"Buy",upside:"20%",timeframe:"6-9mo"},
+{ticker:"CLS",name:"Celestica",sector:"Tech Mfg",thesis:"AI infrastructure hardware",catalyst:"Hyperscaler demand; strong margin expansion",rating:"Strong Buy",upside:"30%",timeframe:"6-9mo"},
+{ticker:"DVN",name:"Devon Energy",sector:"Energy",thesis:"Low-cost US shale; variable dividend",catalyst:"$97 oil; undervalued; potential takeover target",rating:"Strong Buy",upside:"35%",timeframe:"3-6mo"},
+{ticker:"EPD",name:"Enterprise Products",sector:"Midstream",thesis:"Largest US midstream; 26yr dividend growth",catalyst:"Volume growth; NGL demand; 5.9% yield",rating:"Buy",upside:"12%",timeframe:"6-9mo"},
+{ticker:"NEE",name:"NextEra Energy",sector:"Utilities",thesis:"Largest wind/solar operator + regulated utility",catalyst:"AI data centre power demand; rate base growth",rating:"Buy",upside:"18%",timeframe:"6-9mo"},
+]},
+};
 
-let activeTab="ca";
-let S={ca:{sort:{col:"qDiv",asc:false},step:null},us:{sort:{col:"qDiv",asc:false},step:null}};
+let country="ca",strat="div";
+let ST={};Object.keys(D).forEach(k=>{
+  const d=D[k];
+  let sc=d.type==="div"?"qDiv":d.type==="earn"?"avgMove":"upside";
+  ST[k]={sort:{col:sc,asc:false},step:null,filter:"All"};
+});
 
-function switchTab(t){activeTab=t;
-  document.getElementById("tabCA").className=t==="ca"?"tab active-ca":"tab";
-  document.getElementById("tabUS").className=t==="us"?"tab active-us":"tab";
-  document.getElementById("panelCA").className=t==="ca"?"tab-panel active":"tab-panel";
-  document.getElementById("panelUS").className=t==="us"?"tab-panel active":"tab-panel";
-}
+function sc(c){country=c;document.getElementById("cCA").className=c==="ca"?"ctab on-ca":"ctab";document.getElementById("cUS").className=c==="us"?"ctab on-us":"ctab";show();}
+function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF"}[s]).className="stab on";show();}
+function show(){["ca-div","ca-earn","ca-fund","us-div","us-earn","us-fund"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
 
 function ap(s){return(s.qDiv*4)/(parseFloat(s.yield)/100);}
-function esd(tickers,stocks,cap){let d=0;const p=cap/tickers.length;tickers.forEach(t=>{const s=stocks.find(x=>x.ticker===t);if(s){d+=Math.floor(p/ap(s))*s.qDiv;}});return d;}
-function et(m){const d=D[m],cap=Number(document.getElementById(m==="ca"?"capCA":"capUS").value)||0;let t=0;d.rotation.forEach(r=>{t+=esd(r.tickers,d.stocks,cap);});return t;}
-function recalc(m){const cap=Number(document.getElementById(m==="ca"?"capCA":"capUS").value)||0;const t=et(m);
-  document.getElementById(m==="ca"?"totalCA":"totalUS").textContent="$"+t.toFixed(2);
-  document.getElementById(m==="ca"?"pctCA":"pctUS").textContent="~"+((t/(cap||1))*100).toFixed(2)+"% return per cycle (~3 months)";
-  rs(m);rt(m);
+function esd(ts,ss2,cap){let d=0;const p=cap/ts.length;ts.forEach(t=>{const s=ss2.find(x=>x.ticker===t);if(s&&s.qDiv){d+=Math.floor(p/ap(s))*s.qDiv;}});return d;}
+
+function buildPanel(key){
+  const d=D[key],s=ST[key],t=d.type;
+  const panel=document.getElementById("p-"+key);let h="";
+
+  if(t==="div"){
+    h+=`<div class="cap-box"><div><label>Capital (${d.currency})</label><input type="number" id="${d.capId}" value="50000" oninput="recalc('${key}')"></div><div class="cr"><div class="l">Est. Dividends</div><div class="a" id="${d.totalId}">$0</div><div class="p" id="${d.pctId}"></div></div></div>`;
+    h+=`<div class="warn warn-y"><strong>\u26a0 Risks:</strong> Stocks drop on ex-date. CC ETFs cap upside & may erode NAV. Tax implications. Iran volatility.</div>`;
+  }
+  if(t==="earn"){
+    h+=`<div class="warn warn-r"><strong>\u26a0 Risks:</strong> Earnings can cause 5-15%+ drops. Even beats sell off on weak guidance. Use stop-losses.</div>`;
+    h+=`<div class="warn warn-b"><strong>\ud83d\udca1</strong> Buy 3-5 days before earnings. Sell 1-2 days after. Rotate to next reporter.</div>`;
+  }
+  if(t==="fund"){
+    h+=`<div class="warn warn-b"><strong>\u2b50 Top 25 Fundamental Picks (${country==="ca"?"Canada":"USA"}):</strong> Curated for 3-9 month horizon based on current market conditions (Iran conflict / oil boom / AI cycle / rate environment). Analyst consensus ratings, catalysts, and estimated upside. <strong>Updated: March 19, 2026.</strong></div>`;
+    h+=`<div class="filters" id="flt-${key}"></div>`;
+  }
+
+  if(d.rotation){
+    h+=`<h2>${t==="div"?"Dividend Rotation":"Earnings Rotation"}</h2><div class="steps" id="steps-${key}"></div>`;
+  }
+  h+=`<h2>${t==="fund"?"Fundamental Picks":"Stock Reference"}</h2>`;
+  h+=`<div class="tw"><table><thead><tr id="th-${key}"></tr></thead><tbody id="tb-${key}"></tbody></table></div>`;
+
+  panel.innerHTML=h;
+  if(d.rotation)renderSteps(key);
+  if(t==="fund")buildFilters(key);
+  renderTable(key);
+  if(t==="div")recalc(key);
 }
 
-function rs(m){const d=D[m],s=S[m],cap=Number(document.getElementById(m==="ca"?"capCA":"capUS").value)||0;
-  const c=document.getElementById(m==="ca"?"stepsCA":"stepsUS");c.innerHTML="";
-  d.rotation.forEach((r,i)=>{const ia=s.step===i;const dv=document.createElement("div");
-    dv.className="step"+(ia?" active":"");if(ia)dv.style.borderColor=r.color;
-    const tags=r.tickers.map(t=>{const st=d.stocks.find(x=>x.ticker===t);const isETF=st&&st.type==="etf";return`<span class="stag" style="background:${r.color}22;color:${r.color};border:1px solid ${r.color}44">${isETF?"📦 ":""}${t} ($${st?st.qDiv.toFixed(2):"?"})</span>`;}).join("");
-    const est=esd(r.tickers,d.stocks,cap);
-    dv.innerHTML=`<div class="sh"><div class="sn" style="background:${r.color}">${r.step}</div><div class="si"><div class="st">${r.title}</div><div class="sa">${r.action}</div></div><div class="stags">${tags}</div></div><div class="sd">${r.detail}<div class="se"><strong>Est. dividends this step: </strong><span class="v">$${est.toFixed(2)}</span></div></div>`;
-    dv.addEventListener("click",()=>{s.step=s.step===i?null:i;rs(m);rt(m);});c.appendChild(dv);
+function buildFilters(key){
+  const d=D[key],s=ST[key];
+  const sectors=["All",...[...new Set(d.stocks.map(x=>x.sector))].sort()];
+  const c=document.getElementById("flt-"+key);if(!c)return;
+  c.innerHTML=sectors.map(sec=>`<div class="fbtn${s.filter===sec?" on":""}" onclick="setFilter('${key}','${sec}')">${sec}</div>`).join("");
+}
+function setFilter(key,sec){ST[key].filter=sec;buildFilters(key);renderTable(key);}
+
+function renderSteps(key){
+  const d=D[key],s=ST[key];const c=document.getElementById("steps-"+key);if(!c)return;c.innerHTML="";
+  d.rotation.forEach((r,i)=>{
+    const ia=s.step===i;const dv=document.createElement("div");dv.className="step"+(ia?" active":"");if(ia)dv.style.borderColor=r.color;
+    const tags=r.tickers.map(t=>{const st=d.stocks.find(x=>x.ticker===t);let ex="";if(st){ex=st.qDiv?" ($"+st.qDiv.toFixed(2)+")":st.avgMove?" (\u00b1"+st.avgMove+")":"";}return`<span class="stag" style="background:${r.color}22;color:${r.color};border:1px solid ${r.color}33">${t}${ex}</span>`;}).join("");
+    let extra="";
+    if(d.type==="div"&&r.tickers.length>0){const cap=Number(document.getElementById(d.capId)?.value)||50000;const est=esd(r.tickers,d.stocks,cap);extra=`<div class="se"><strong>Est: </strong><span class="v">$${est.toFixed(2)}</span></div>`;}
+    if(d.type==="earn"&&r.tickers.length>0){const top=d.stocks.filter(x=>r.tickers.includes(x.ticker)).sort((a,b)=>parseFloat(b.avgMove||0)-parseFloat(a.avgMove||0))[0];if(top)extra=`<div class="tip">\ud83c\udfc6 ${top.ticker} \u00b1${top.avgMove}: ${top.strategy}</div>`;}
+    dv.innerHTML=`<div class="sh"><div class="sn" style="background:${r.color}">${r.step}</div><div class="si"><div class="st">${r.title}</div><div class="sa">${r.action}</div></div><div class="stags">${tags}</div></div><div class="sd">${r.detail}${extra}</div>`;
+    dv.addEventListener("click",()=>{s.step=s.step===i?null:i;renderSteps(key);renderTable(key);});c.appendChild(dv);
   });
 }
 
-function rt(m){const d=D[m],s=S[m];
-  const sorted=[...d.stocks].sort((a,b)=>{let av=a[s.sort.col],bv=b[s.sort.col];
-    if(s.sort.col==="yield"){av=parseFloat(av);bv=parseFloat(bv);}
+function renderTable(key){
+  const d=D[key],s=ST[key],t=d.type;
+  let list=[...d.stocks];
+  if(t==="fund"&&s.filter!=="All") list=list.filter(x=>x.sector===s.filter);
+  list.sort((a,b)=>{let av=a[s.sort.col],bv=b[s.sort.col];
+    if(["avgMove","yield","upside"].includes(s.sort.col)){av=parseFloat(av)||0;bv=parseFloat(bv)||0;}
+    if(s.sort.col==="qDiv"){av=av||0;bv=bv||0;}
     if(typeof av==="number")return s.sort.asc?av-bv:bv-av;
-    return s.sort.asc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));
+    return s.sort.asc?String(av||"").localeCompare(String(bv||"")):String(bv||"").localeCompare(String(av||""));
   });
-  const hl=s.step!==null?d.rotation[s.step].tickers:[];const sc=s.step!==null?d.rotation[s.step].color:null;
-  const cols=[{k:"ticker",l:"Ticker"},{k:"name",l:"Company"},{k:"type",l:"Type"},{k:"qDiv",l:"Q Div ($)"},{k:"yield",l:"Yield"},{k:"exDiv",l:"Ex-Div"},{k:"payDate",l:"Pay Date"},{k:"sector",l:"Sector"}];
-  const th=document.getElementById(m==="ca"?"thCA":"thUS");th.innerHTML="";
-  cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.l+(s.sort.col===c.k?(s.sort.asc?" \u2191":" \u2193"):"");
-    h.onclick=()=>{if(s.sort.col===c.k)s.sort.asc=!s.sort.asc;else{s.sort.col=c.k;s.sort.asc=false;}rt(m);};th.appendChild(h);
-  });
-  const tb=document.getElementById(m==="ca"?"tbCA":"tbUS");tb.innerHTML="";
-  sorted.forEach((st,i)=>{const isHL=hl.includes(st.ticker);const tr=document.createElement("tr");
-    if(i%2===0)tr.classList.add("ev");if(isHL){tr.classList.add("hl");tr.style.borderLeftColor=sc;tr.style.background=sc+"18";}
-    const typeClass=st.type==="etf"?"ttype-etf":"ttype-stock";
-    tr.innerHTML=`<td class="tt" style="color:${isHL?sc:'#e2e8f0'}">${st.ticker}</td><td class="tn2">${st.name}</td><td><span class="ttype ${typeClass}">${st.type.toUpperCase()}</span></td><td class="td">$${st.qDiv.toFixed(4)}</td><td class="ty">${st.yield}</td><td class="tdt">${st.exDiv}</td><td class="tdt">${st.payDate}</td><td class="ts"><span>${st.sector}</span></td>`;
+  const hl=s.step!==null&&d.rotation?d.rotation[s.step].tickers:[];const scc=s.step!==null&&d.rotation?d.rotation[s.step].color:null;
+
+  const cols=t==="div"?[{k:"ticker",l:"Ticker"},{k:"name",l:"Company"},{k:"type",l:"Type"},{k:"qDiv",l:"Q Div"},{k:"yield",l:"Yield"},{k:"exDiv",l:"Ex-Div"},{k:"sector",l:"Sector"}]
+    :t==="earn"?[{k:"ticker",l:"Ticker"},{k:"name",l:"Company"},{k:"sector",l:"Sector"},{k:"lastResult",l:"Result"},{k:"avgMove",l:"Avg Move"},{k:"streak",l:"Streak"},{k:"nextDate",l:"Report Date"},{k:"strategy",l:"Strategy"}]
+    :[{k:"ticker",l:"Ticker"},{k:"name",l:"Company"},{k:"sector",l:"Sector"},{k:"rating",l:"Rating"},{k:"upside",l:"Upside"},{k:"timeframe",l:"Timeframe"},{k:"catalyst",l:"Catalyst"},{k:"thesis",l:"Thesis"}];
+
+  const th=document.getElementById("th-"+key);th.innerHTML="";
+  cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.l+(s.sort.col===c.k?(s.sort.asc?" \u2191":" \u2193"):"");h.onclick=()=>{if(s.sort.col===c.k)s.sort.asc=!s.sort.asc;else{s.sort.col=c.k;s.sort.asc=false;}renderTable(key);};th.appendChild(h);});
+
+  const tb=document.getElementById("tb-"+key);tb.innerHTML="";
+  list.forEach((st,i)=>{const isHL=hl.includes(st.ticker);const tr=document.createElement("tr");
+    if(i%2===0)tr.classList.add("ev");if(isHL){tr.classList.add("hl");tr.style.borderLeftColor=scc;tr.style.background=scc+"12";}
+
+    if(t==="div"){
+      const tc=st.type==="etf"?"ttype-etf":"ttype-stock";
+      tr.innerHTML=`<td class="tt" style="color:${isHL?scc:'#e2e8f0'}">${st.ticker}</td><td class="tn2">${st.name}</td><td><span class="ttype ${tc}">${(st.type||"").toUpperCase()}</span></td><td class="td">$${(st.qDiv||0).toFixed(3)}</td><td class="ty">${st.yield}</td><td style="color:#475569">${st.exDiv}</td><td class="ts"><span>${st.sector}</span></td>`;
+    }else if(t==="earn"){
+      const rc=st.lastResult==="beat"?"beat":"miss";
+      tr.innerHTML=`<td class="tt" style="color:${isHL?scc:'#e2e8f0'}">${st.ticker}</td><td class="tn2">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td class="${rc}">${st.lastResult==="beat"?"\u2705":"\u274c"}</td><td style="font-weight:700;color:${parseFloat(st.avgMove)>=5?"#22c55e":"#94a3b8"}">\u00b1${st.avgMove}</td><td style="color:#475569;font-size:8px">${st.streak}</td><td style="color:#fbbf24;font-size:9px">${st.nextDate}</td><td style="color:#475569;font-size:8px;max-width:120px">${st.strategy}</td>`;
+    }else{
+      const ratingColor=st.rating.includes("Strong")?"#22c55e":"#60a5fa";
+      tr.innerHTML=`<td class="tt" style="color:#e2e8f0">${st.ticker}</td><td class="tn2">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td style="color:${ratingColor};font-weight:700;font-size:9px">${st.rating}</td><td class="bull" style="font-weight:700">${st.upside}</td><td style="color:#fbbf24;font-size:9px">${st.timeframe}</td><td style="color:#94a3b8;font-size:8px;max-width:150px">${st.catalyst}</td><td style="color:#475569;font-size:8px;max-width:140px">${st.thesis}</td>`;
+    }
     tb.appendChild(tr);
   });
 }
 
-recalc("ca");recalc("us");
+function recalc(key){
+  const d=D[key];if(!d||!d.capId)return;
+  const cap=Number(document.getElementById(d.capId)?.value)||0;
+  let tot=0;d.rotation.forEach(r=>{tot+=esd(r.tickers,d.stocks,cap);});
+  const te=document.getElementById(d.totalId);if(te)te.textContent="$"+tot.toFixed(2);
+  const pe=document.getElementById(d.pctId);if(pe)pe.textContent="~"+((tot/(cap||1))*100).toFixed(2)+"% per cycle";
+  renderSteps(key);
+}
+
+Object.keys(D).forEach(k=>buildPanel(k));show();
 </script>
 </body>
 </html>

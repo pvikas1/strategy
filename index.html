@@ -106,7 +106,7 @@ h2{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px}
 <div class="hdr">
   <h1>Stock Playbook</h1>
   <p class="sub">Dividends + Earnings + Fundamentals + Technical Analysis + Income Planner — USA &amp; Canada</p>
-  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span><span class="bdg" style="background:#ec489918;color:#ec4899;border:1px solid #ec489940">INCOME PLAN</span><span class="bdg" style="background:#06b6d418;color:#06b6d4;border:1px solid #06b6d440">RETIRE@40</span></div>
+  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span><span class="bdg" style="background:#ec489918;color:#ec4899;border:1px solid #ec489940">INCOME PLAN</span><span class="bdg" style="background:#06b6d418;color:#06b6d4;border:1px solid #06b6d440">RETIRE@40</span><span class="bdg" style="background:#ef444418;color:#ef4444;border:1px solid #ef444440">30-DAY TRADER</span></div>
 </div>
 <div class="ctabs">
   <div class="ctab on-ca" id="cCA" onclick="sc('ca')"><span class="fl">🇨🇦</span>Canada TSX</div>
@@ -119,11 +119,12 @@ h2{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px}
   <div class="stab" id="sT" onclick="ss('tech')">📊 Technicals</div>
   <div class="stab" id="sI" onclick="ss('income')">🎯 Income Plan</div>
   <div class="stab" id="sR" onclick="ss('retire')">🏖️ Retire@40</div>
+  <div class="stab" id="sW" onclick="ss('swing')">⚡ 30-Day Trader</div>
 </div>
 
-<!-- 12 PANELS -->
-<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div><div class="pnl" id="p-ca-income"></div><div class="pnl" id="p-ca-retire"></div>
-<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div><div class="pnl" id="p-us-income"></div><div class="pnl" id="p-us-retire"></div>
+<!-- 14 PANELS -->
+<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div><div class="pnl" id="p-ca-income"></div><div class="pnl" id="p-ca-retire"></div><div class="pnl" id="p-ca-swing"></div>
+<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div><div class="pnl" id="p-us-income"></div><div class="pnl" id="p-us-retire"></div><div class="pnl" id="p-us-swing"></div>
 
 <div class="footer">
   <strong>Disclaimer:</strong> Not financial advice. All data approximate as of Mar 19, 2026. Technical signals are derived from estimated SMA/BB calculations based on recent price action research — they are NOT real-time. Verify all data with your broker. Stocks can drop on ex-dates and after earnings. Past performance ≠ future results. Consult a qualified financial advisor.
@@ -315,8 +316,8 @@ let country="ca",strat="div";
 let ST={};
 
 function sc(c){country=c;document.getElementById("cCA").className=c==="ca"?"ctab on-ca":"ctab";document.getElementById("cUS").className=c==="us"?"ctab on-us":"ctab";show();}
-function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT",income:"sI",retire:"sR"}[s]).className="stab on";show();}
-function show(){["ca-div","ca-earn","ca-fund","ca-tech","ca-income","ca-retire","us-div","us-earn","us-fund","us-tech","us-income","us-retire"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
+function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT",income:"sI",retire:"sR",swing:"sW"}[s]).className="stab on";show();}
+function show(){["ca-div","ca-earn","ca-fund","ca-tech","ca-income","ca-retire","ca-swing","us-div","us-earn","us-fund","us-tech","us-income","us-retire","us-swing"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
 
 function ap(s){return(s.qDiv*4)/(parseFloat(s.yield)/100);}
 function esd(ts,ss2,cap){let d=0;const p=cap/ts.length;ts.forEach(t=>{const s=ss2.find(x=>x.ticker===t);if(s&&s.qDiv){d+=Math.floor(p/ap(s))*s.qDiv;}});return d;}
@@ -887,6 +888,121 @@ function calcRetire(key){
   document.getElementById("r-table-"+key).innerHTML=tHTML;
 }
 
+/* ═══ 30-DAY SWING TRADER ═══ */
+const SWING_CA=[
+{ticker:"CNQ",name:"Canadian Natural",price:58.2,entry:55,target:66,stop:52,days:"5-10",setup:"Oil boom pullback buy",signal:"Buy Dip",reason:"$97 WTI but stock pulled back 5% from highs; RSI cooling from overbought; buy at SMA10 support ~$55; target prior high $66; stop below SMA20"},
+{ticker:"SU",name:"Suncor Energy",price:62.4,entry:59,target:70,stop:56,days:"5-12",setup:"Momentum continuation",signal:"Buy Dip",reason:"Oil boom leader; brief pullback to SMA10; volume confirming trend; target $70 resistance; tight stop below recent swing low"},
+{ticker:"AEM",name:"Agnico Eagle",price:128.5,entry:125,target:142,stop:120,days:"7-14",setup:"Gold breakout",signal:"Buy",reason:"Gold at ATH; safe haven demand from Iran war; buy on any pullback to $125; target next resistance $142; gold momentum strong"},
+{ticker:"ABX",name:"Barrick Gold",price:27.8,entry:26.5,target:31,stop:25,days:"7-14",setup:"Gold momentum",signal:"Buy",reason:"Gold safe haven; catching up to Agnico; buy pullback to SMA20 ~$26.50; target $31 resistance; good risk/reward"},
+{ticker:"SHOP",name:"Shopify",price:145,entry:135,target:160,stop:128,days:"10-20",setup:"Oversold bounce",signal:"Buy Dip",reason:"Tech sold off hard on Iran/rates; near lower BB; RSI <35 = oversold; buy at $135 support; target $160 (SMA50); wider stop for volatility"},
+{ticker:"CCO",name:"Cameco",price:76.8,entry:73,target:85,stop:69,days:"10-15",setup:"Nuclear momentum",signal:"Buy Dip",reason:"AI power demand driving nuclear; pullback to SMA20 ~$73; target previous high $85; uranium supply deficit thesis intact"},
+{ticker:"ATD",name:"Couche-Tard",price:82.3,entry:80,target:90,stop:77,days:"7-14",setup:"Breakout retest",signal:"Buy",reason:"Broke above $80 resistance; retesting as support; Seven & i bid catalyst; target $90; tight stop below breakout level"},
+{ticker:"NA",name:"National Bank",price:137.5,entry:133,target:148,stop:128,days:"10-20",setup:"Post-earnings drift",signal:"Buy Dip",reason:"Beat earnings + CWB integration; positive drift expected; buy pullback to $133; target $148; strongest bank technically"},
+{ticker:"IMO",name:"Imperial Oil",price:108.5,entry:104,target:118,stop:100,days:"5-10",setup:"Oil boom momentum",signal:"Buy Dip",reason:"XOM subsidiary; oil at $97; any dip to SMA10 ~$104 is a buy; target $118 high; stop below $100 round number"},
+{ticker:"BCE",name:"BCE Inc",price:35.2,entry:33,target:37,stop:31.5,days:"3-7",setup:"Dead cat bounce",signal:"Speculative Buy",reason:"⚠️ HIGH RISK: Death cross, but extreme oversold RSI <20; short squeeze potential; quick 10% bounce possible; very tight stop; trade small"},
+];
+
+const SWING_US=[
+{ticker:"XOM",name:"Exxon Mobil",price:158,entry:150,target:175,stop:143,days:"5-12",setup:"Oil boom momentum",signal:"Buy Dip",reason:"$97 WTI! Stock surging but volatile; buy pullbacks to SMA10 ~$150; target $175 (new high); stop below recent swing low $143"},
+{ticker:"CVX",name:"Chevron",price:185,entry:178,target:200,stop:170,days:"7-14",setup:"Oil breakout",signal:"Buy Dip",reason:"Oil boom + Hess merger; buy dip to $178 SMA10; target round $200; Iran conflict driving; stop below $170 support"},
+{ticker:"DVN",name:"Devon Energy",price:52,entry:49,target:60,stop:46,days:"7-14",setup:"Shale value + oil boom",signal:"Buy Dip",reason:"Low-cost shale at $97 oil; massive FCF; buy at $49 support; target $60 prior resistance; potential takeover = extra upside"},
+{ticker:"LMT",name:"Lockheed Martin",price:520,entry:505,target:565,stop:485,days:"7-14",setup:"War premium",signal:"Buy Dip",reason:"Iran conflict direct beneficiary; defence spending surge; buy pullback to SMA10 ~$505; target $565; trail stop as it runs"},
+{ticker:"RTX",name:"RTX Corp",price:132,entry:127,target:145,stop:122,days:"7-14",setup:"Defence momentum",signal:"Buy Dip",reason:"Missiles + Pratt engines; Iran tailwind; buy dip to $127; target $145 resistance; strong golden cross"},
+{ticker:"NFLX",name:"Netflix",price:955,entry:920,target:1020,stop:890,days:"10-15",setup:"Pre-earnings run",signal:"Buy",reason:"Reports ~Apr 17; beat 7/8; ad tier growth; buy before earnings; stocks often run 5-8% into strong earnings; sell day after"},
+{ticker:"GS",name:"Goldman Sachs",price:565,entry:545,target:610,stop:525,days:"7-14",setup:"Trading revenue play",signal:"Buy Dip",reason:"Massive trading volumes from Iran conflict; reports ~Apr 14; buy at SMA50 ~$545; target $610 prior high; report catalyst"},
+{ticker:"NEM",name:"Newmont Mining",price:52,entry:49,target:58,stop:46,days:"7-14",setup:"Gold breakout",signal:"Buy Dip",reason:"World's largest gold miner; gold at ATH; safe haven demand; buy pullback to $49; target $58 prior resistance"},
+{ticker:"META",name:"Meta Platforms",price:585,entry:565,target:630,stop:545,days:"10-20",setup:"Pre-earnings accumulate",signal:"Buy Dip",reason:"Beat 8/8 quarters; reports Apr 29; above all SMAs; buy dip to $565 SMA20; target $630; best mega-cap technically"},
+{ticker:"NVDA",name:"NVIDIA",price:118,entry:108,target:135,stop:100,days:"15-25",setup:"Oversold bounce to earnings",signal:"Buy Dip",reason:"⚡ AI king sold off with tech; near lower BB; RSI approaching 30; buy at $108 support; target $135 (SMA50); May 20 earnings catalyst; HIGH VOLATILITY"},
+{ticker:"TSLA",name:"Tesla",price:242,entry:220,target:280,stop:200,days:"5-10",setup:"Mean reversion bounce",signal:"Speculative Buy",reason:"⚠️ HIGH RISK: Death cross; severely beaten down; but RSI extreme oversold; quick 15%+ bounce possible from $220 support; trade SMALL; tight stop $200"},
+{ticker:"AAPL",name:"Apple",price:213,entry:205,target:230,stop:195,days:"10-20",setup:"Pre-earnings accumulate",signal:"Buy Dip",reason:"Beat 8/8; reports Apr 30; at SMA50 ~$205 support; buy here for earnings run; target $230; solid risk/reward"},
+];
+
+function buildSwingPanel(key){
+  const isCA=key.includes("ca");
+  const cur=isCA?"C$":"US$";
+  const data=isCA?SWING_CA:SWING_US;
+  const panel=document.getElementById("p-"+key);
+  const capital=10000;
+
+  let h=`
+  <div class="info" style="background:#fef2f2;border:1px solid #fca5a5;color:#991b1b">
+    <strong>⚡ 30-Day Swing Trader — ${cur}10,000 Capital</strong><br>
+    Buy low, sell high within 30 days. This is <strong>active trading</strong> — higher risk, higher reward. Uses technical setups (RSI oversold, SMA support, Bollinger Band bounces, pre-earnings runs). <strong>Always use stop-losses. Never risk more than 2-3% of capital per trade.</strong>
+  </div>
+
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:12px">
+    <h2 style="font-size:14px;margin-bottom:8px">📋 The Rules (Follow These or Lose Money)</h2>
+    <table style="font-size:11px;width:100%;border-collapse:collapse">
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;font-weight:700;color:#dc2626;width:30px">1</td><td style="padding:6px"><strong>Position Size:</strong> Max ${cur}2,500 per trade (25% of capital). Never go all-in on one stock.</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;font-weight:700;color:#dc2626">2</td><td style="padding:6px"><strong>Stop-Loss:</strong> Set BEFORE you buy. If it hits your stop, sell immediately. No hoping, no averaging down.</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;font-weight:700;color:#dc2626">3</td><td style="padding:6px"><strong>Risk/Reward:</strong> Only take trades where potential gain is at least 2x your risk. If risking $3, target $6+.</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;font-weight:700;color:#dc2626">4</td><td style="padding:6px"><strong>Max 3-4 positions at once.</strong> Spread across different sectors (don't put all in energy).</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;font-weight:700;color:#dc2626">5</td><td style="padding:6px"><strong>Buy Mon-Wed.</strong> Avoid Friday buys (weekend uncertainty). Enter 2-4hrs after market open when volatility settles.</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;font-weight:700;color:#dc2626">6</td><td style="padding:6px"><strong>Take profits at target.</strong> Don't get greedy. A 10% gain in 7 days is excellent. Sell half at target, trail stop on rest.</td></tr>
+    <tr><td style="padding:6px;font-weight:700;color:#dc2626">7</td><td style="padding:6px"><strong>If 2 trades hit stop-loss in a row, STOP trading for 1 week.</strong> Review what went wrong. The market isn't going anywhere.</td></tr>
+    </table>
+  </div>
+
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:12px">
+    <h2 style="font-size:14px;margin-bottom:8px">🗓️ Sample 30-Day Rotation Plan (${cur}10,000)</h2>
+    <table style="font-size:11px;width:100%;border-collapse:collapse">
+    <tr style="border-bottom:2px solid #cbd5e1;background:#f8fafc"><th style="padding:6px;text-align:left">Week</th><th style="padding:6px;text-align:left">Action</th><th style="padding:6px;text-align:left">Positions</th><th style="padding:6px;text-align:left">Capital Used</th></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;font-weight:700;color:#7c3aed">Week 1</td><td style="padding:6px">Buy 2 high-conviction dips (energy + gold)</td><td style="padding:6px;font-weight:600">${isCA?'CNQ + AEM':'XOM + NEM'}</td><td style="padding:6px">${cur}5,000 (${cur}2,500 each)</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;font-weight:700;color:#2563eb">Week 2</td><td style="padding:6px">If Week 1 hits targets → sell, buy next setups. If held → trail stops.</td><td style="padding:6px;font-weight:600">${isCA?'CCO + ATD':'LMT + GS'}</td><td style="padding:6px">${cur}5,000</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;font-weight:700;color:#d97706">Week 3</td><td style="padding:6px">Pre-earnings plays — buy stocks reporting in Week 4</td><td style="padding:6px;font-weight:600">${isCA?'SHOP + NA':'NFLX + META'}</td><td style="padding:6px">${cur}5,000</td></tr>
+    <tr><td style="padding:6px;font-weight:700;color:#15803d">Week 4</td><td style="padding:6px">Sell pre-earnings winners. Close all positions. Count profits.</td><td style="padding:6px;font-weight:600">All closed</td><td style="padding:6px">${cur}0 in market</td></tr>
+    </table>
+    <div style="margin-top:8px;padding:6px;background:#f0fdf4;border:1px solid #86efac;border-radius:4px;font-size:10px;color:#15803d">
+      <strong>Target outcome:</strong> 3-4 winning trades at 8-15% each on ${cur}2,500 positions = ${cur}600-1,500 profit in 30 days (6-15% return on ${cur}10,000). Realistic if disciplined. Even 2 winners + 1 stop-loss = net positive.
+    </div>
+  </div>
+
+  <h2>📊 Trade Setups — Current Opportunities (Mar 19, 2026)</h2>
+  <p class="tn">Sorted by Risk/Reward ratio. Green = best R/R. All entries, targets, stops in ${cur}.</p>
+  <div class="tw"><table style="font-size:11px" id="sw-table-${key}"></table></div>
+  `;
+
+  panel.innerHTML=h;
+
+  // Build trade table
+  let tbl=`<thead><tr style="border-bottom:2px solid #cbd5e1;background:#f8fafc">
+    <th style="padding:6px;cursor:default">Ticker</th><th style="padding:6px;cursor:default">Company</th><th style="padding:6px;cursor:default">Price</th><th style="padding:6px;cursor:default">Entry</th><th style="padding:6px;cursor:default">Target</th><th style="padding:6px;cursor:default">Stop</th><th style="padding:6px;cursor:default">Gain %</th><th style="padding:6px;cursor:default">Risk %</th><th style="padding:6px;cursor:default">R/R</th><th style="padding:6px;cursor:default">Days</th><th style="padding:6px;cursor:default">Signal</th><th style="padding:6px;cursor:default">Setup & Why</th>
+  </tr></thead><tbody>`;
+
+  const sorted=[...data].sort((a,b)=>{
+    const rrA=(a.target-a.entry)/(a.entry-a.stop);
+    const rrB=(b.target-b.entry)/(b.entry-b.stop);
+    return rrB-rrA;
+  });
+
+  sorted.forEach((s,i)=>{
+    const gain=((s.target-s.entry)/s.entry*100).toFixed(1);
+    const risk=((s.entry-s.stop)/s.entry*100).toFixed(1);
+    const rr=((s.target-s.entry)/(s.entry-s.stop)).toFixed(1);
+    const rrColor=rr>=3?"#15803d":rr>=2?"#1e40af":"#b45309";
+    const sigColor=s.signal.includes("Speculative")?"#dc2626":s.signal.includes("Buy")?"#15803d":"#1e40af";
+    const dollarGain=Math.round((s.target-s.entry)/s.entry*2500);
+    const dollarRisk=Math.round((s.entry-s.stop)/s.entry*2500);
+
+    tbl+=`<tr style="border-bottom:1px solid #f1f5f9;${i%2===0?'background:#f8fafc':''}">
+      <td style="padding:6px;font-weight:700;color:#0f172a">${s.ticker}</td>
+      <td style="padding:6px;color:#475569">${s.name}</td>
+      <td style="padding:6px;font-weight:600">${cur}${s.price}</td>
+      <td style="padding:6px;color:#1e40af;font-weight:700">${cur}${s.entry}</td>
+      <td style="padding:6px;color:#15803d;font-weight:700">${cur}${s.target}</td>
+      <td style="padding:6px;color:#dc2626;font-weight:700">${cur}${s.stop}</td>
+      <td style="padding:6px;color:#15803d;font-weight:700">+${gain}%<div style="font-size:8px;color:#16a34a">+${cur}${dollarGain}</div></td>
+      <td style="padding:6px;color:#dc2626;font-weight:600">-${risk}%<div style="font-size:8px;color:#ef4444">-${cur}${dollarRisk}</div></td>
+      <td style="padding:6px;font-weight:800;color:${rrColor};font-size:13px">${rr}:1</td>
+      <td style="padding:6px;color:#475569">${s.days}d</td>
+      <td style="padding:6px"><span style="background:${sigColor}15;color:${sigColor};padding:2px 6px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid ${sigColor}30">${s.signal}</span></td>
+      <td style="padding:6px;color:#475569;max-width:240px;white-space:normal;line-height:1.4;font-size:10px">${s.reason}</td>
+    </tr>`;
+  });
+  tbl+='</tbody>';
+  document.getElementById("sw-table-"+key).innerHTML=tbl;
+}
+
 /* ═══ INIT ═══ */
 buildDivPanel("ca-div");buildDivPanel("us-div");
 buildEarnPanel("ca-earn");buildEarnPanel("us-earn");
@@ -894,6 +1010,7 @@ buildFundPanel("ca-fund",FUND_CA);buildFundPanel("us-fund",FUND_US);
 buildTechPanel("ca-tech",TSX_TECH);buildTechPanel("us-tech",US_TECH);
 buildIncomePanel("ca-income",INCOME_CA);buildIncomePanel("us-income",INCOME_US);
 buildRetirePanel("ca-retire");buildRetirePanel("us-retire");
+buildSwingPanel("ca-swing");buildSwingPanel("us-swing");
 show();
 </script>
 </body>

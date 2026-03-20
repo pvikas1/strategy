@@ -6,105 +6,107 @@
 <title>Stock Playbook — Complete Strategies + Technical Analysis</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#060a14;min-height:100vh;color:#e2e8f0;padding:10px;font-size:11px}
-.ctr{max-width:1100px;margin:0 auto}
-.hdr{text-align:center;margin-bottom:10px;padding:12px 0 8px;border-bottom:1px solid rgba(255,255,255,0.04)}
-.hdr h1{font-size:22px;font-weight:900;background:linear-gradient(90deg,#22c55e,#f59e0b,#ef4444,#a855f7,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hdr .sub{color:#334155;font-size:10px;margin-top:2px}
-.badges{margin-top:4px;display:flex;gap:3px;justify-content:center;flex-wrap:wrap}
-.bdg{padding:2px 6px;border-radius:10px;font-size:8px;font-weight:700;letter-spacing:.3px}
-.bdg-d{background:#22c55e15;color:#4ade80;border:1px solid #22c55e30}.bdg-e{background:#f59e0b15;color:#fbbf24;border:1px solid #f59e0b30}
-.bdg-f{background:#3b82f615;color:#60a5fa;border:1px solid #3b82f630}.bdg-t{background:#a855f715;color:#c084fc;border:1px solid #a855f730}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;min-height:100vh;color:#1e293b;padding:14px;font-size:12px}
+.ctr{max-width:1140px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:14px;padding:16px 0 12px;border-bottom:2px solid #e2e8f0}
+.hdr h1{font-size:28px;font-weight:900;background:linear-gradient(90deg,#16a34a,#d97706,#dc2626,#7c3aed,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr .sub{color:#64748b;font-size:12px;margin-top:4px}
+.badges{margin-top:6px;display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.bdg{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.4px}
+.bdg-d{background:#dcfce7;color:#15803d;border:1px solid #86efac}.bdg-e{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.bdg-f{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd}.bdg-t{background:#ede9fe;color:#6d28d9;border:1px solid #c4b5fd}
 
-.ctabs{display:flex;gap:2px;background:rgba(255,255,255,0.02);border-radius:6px 6px 0 0;padding:2px}
-.ctab{flex:1;padding:8px;text-align:center;border-radius:5px;cursor:pointer;font-weight:700;font-size:11px;color:#1e293b;transition:all .12s}
-.ctab:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
-.ctab.on-ca{background:linear-gradient(135deg,#dc2626,#fff,#dc2626);color:#0f172a}
-.ctab.on-us{background:linear-gradient(135deg,#1e40af,#fff,#dc2626);color:#0f172a}
-.fl{font-size:14px;margin-right:2px;vertical-align:middle}
+.ctabs{display:flex;gap:3px;background:#e2e8f0;border-radius:8px 8px 0 0;padding:3px}
+.ctab{flex:1;padding:10px;text-align:center;border-radius:6px;cursor:pointer;font-weight:700;font-size:13px;color:#64748b;transition:all .15s;background:transparent}
+.ctab:hover{color:#1e293b;background:#fff}
+.ctab.on-ca{background:linear-gradient(135deg,#dc2626,#fff,#dc2626);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
+.ctab.on-us{background:linear-gradient(135deg,#1e40af,#fff,#dc2626);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3)}
+.fl{font-size:16px;margin-right:4px;vertical-align:middle}
 
-.stabs{display:flex;gap:2px;background:rgba(255,255,255,0.02);border-radius:0 0 6px 6px;padding:2px;margin-bottom:10px}
-.stab{flex:1;padding:6px 3px;text-align:center;border-radius:5px;cursor:pointer;font-weight:600;font-size:10px;color:#1e293b;transition:all .12s}
-.stab:hover{color:#e2e8f0;background:rgba(255,255,255,0.03)}
-.stab.on{background:rgba(255,255,255,0.06);color:#f8fafc;border:1px solid rgba(255,255,255,0.08)}
+.stabs{display:flex;gap:3px;background:#e2e8f0;border-radius:0 0 8px 8px;padding:3px;margin-bottom:14px}
+.stab{flex:1;padding:8px 4px;text-align:center;border-radius:6px;cursor:pointer;font-weight:600;font-size:12px;color:#64748b;transition:all .15s;background:transparent}
+.stab:hover{color:#1e293b;background:#fff}
+.stab.on{background:#fff;color:#0f172a;border:1px solid #cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,0.08)}
 
 .pnl{display:none}.pnl.on{display:block}
-.info{border-radius:6px;padding:8px;margin-bottom:8px;font-size:9px;line-height:1.4}
-.info-b{background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.12);color:#93c5fd}
-.info-p{background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.12);color:#d8b4fe}
-.info strong{font-size:10px}
+.info{border-radius:8px;padding:12px;margin-bottom:10px;font-size:11px;line-height:1.6}
+.info-b{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.info-p{background:#f5f3ff;border:1px solid #ddd6fe;color:#5b21b6}
+.info strong{font-size:12px}
 
-.filters{margin-bottom:6px;display:flex;gap:2px;flex-wrap:wrap}
-.fb{padding:2px 6px;border-radius:3px;font-size:8px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.015);color:#475569;transition:all .1s}
-.fb:hover,.fb.on{background:rgba(255,255,255,0.06);color:#f8fafc;border-color:rgba(255,255,255,0.12)}
+.filters{margin-bottom:8px;display:flex;gap:4px;flex-wrap:wrap}
+.fb{padding:4px 10px;border-radius:4px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid #cbd5e1;background:#fff;color:#64748b;transition:all .12s}
+.fb:hover,.fb.on{background:#1e293b;color:#fff;border-color:#1e293b}
 
-.search-box{margin-bottom:6px}
-.search-box input{background:#0a0f1a;border:1px solid #1e293b;border-radius:4px;padding:5px 8px;color:#e2e8f0;font-size:11px;width:200px;outline:none}
-.search-box input:focus{border-color:#a855f7}
+.search-box{margin-bottom:8px}
+.search-box input{background:#fff;border:1px solid #cbd5e1;border-radius:6px;padding:7px 10px;color:#1e293b;font-size:12px;width:220px;outline:none}
+.search-box input:focus{border-color:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,0.15)}
 
 .tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:9px}
-thead tr{border-bottom:1px solid #1e293b;position:sticky;top:0;background:#060a14}
-th{padding:4px 3px;text-align:left;color:#334155;cursor:pointer;font-weight:600;white-space:nowrap;user-select:none;font-size:8px}
-th:hover{color:#e2e8f0}
-td{padding:4px 3px;white-space:nowrap}
-tr.ev{background:rgba(255,255,255,0.008)}
-.tt{font-weight:700;color:#e2e8f0}.tn2{color:#64748b}
-.ts span{background:rgba(255,255,255,0.03);padding:1px 3px;border-radius:2px;font-size:7px}
+table{width:100%;border-collapse:collapse;font-size:11px}
+thead tr{border-bottom:2px solid #cbd5e1;position:sticky;top:0;background:#f1f5f9}
+th{padding:8px 5px;text-align:left;color:#475569;cursor:pointer;font-weight:700;white-space:nowrap;user-select:none;font-size:10px}
+th:hover{color:#0f172a;background:#e2e8f0}
+td{padding:7px 5px;white-space:nowrap}
+tr.ev{background:#f8fafc}
+tr:hover{background:#f1f5f9}
+.tt{font-weight:700;color:#0f172a}.tn2{color:#475569}
+.ts span{background:#f1f5f9;padding:2px 6px;border-radius:3px;font-size:10px;color:#334155;border:1px solid #e2e8f0}
 
-/* Signal colors */
-.sig-sb{color:#22c55e;font-weight:800}.sig-b{color:#4ade80;font-weight:700}
-.sig-h{color:#fbbf24;font-weight:600}.sig-s{color:#ef4444;font-weight:700}
-.sig-ss{color:#dc2626;font-weight:800}
-.trend-su{color:#22c55e}.trend-u{color:#4ade80}.trend-sw{color:#fbbf24}.trend-d{color:#f97316}.trend-sd{color:#ef4444}
-.act-buy{background:#22c55e18;color:#22c55e;padding:1px 4px;border-radius:2px;font-weight:700;font-size:8px}
-.act-hold{background:#fbbf2418;color:#fbbf24;padding:1px 4px;border-radius:2px;font-weight:700;font-size:8px}
-.act-sell{background:#ef444418;color:#ef4444;padding:1px 4px;border-radius:2px;font-weight:700;font-size:8px}
-.act-cover{background:#3b82f618;color:#60a5fa;padding:1px 4px;border-radius:2px;font-weight:700;font-size:8px}
-.act-short{background:#f9731618;color:#f97316;padding:1px 4px;border-radius:2px;font-weight:700;font-size:8px}
-.reason{color:#475569;font-size:7px;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+/* Signal colors — adjusted for light bg */
+.sig-sb{color:#15803d;font-weight:800;font-size:12px}.sig-b{color:#16a34a;font-weight:700;font-size:12px}
+.sig-h{color:#b45309;font-weight:600;font-size:12px}.sig-s{color:#dc2626;font-weight:700;font-size:12px}
+.sig-ss{color:#991b1b;font-weight:800;font-size:12px}
+.trend-su{color:#15803d}.trend-u{color:#16a34a}.trend-sw{color:#b45309}.trend-d{color:#ea580c}.trend-sd{color:#dc2626}
+.act-buy{background:#dcfce7;color:#15803d;padding:3px 8px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid #86efac}
+.act-hold{background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid #fcd34d}
+.act-sell{background:#fecaca;color:#991b1b;padding:3px 8px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid #fca5a5}
+.act-cover{background:#dbeafe;color:#1e40af;padding:3px 8px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid #93c5fd}
+.act-short{background:#ffedd5;color:#9a3412;padding:3px 8px;border-radius:4px;font-weight:700;font-size:10px;border:1px solid #fdba74}
+.reason{color:#475569;font-size:10px;max-width:260px;overflow:hidden;text-overflow:ellipsis}
 
-.legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;font-size:8px;color:#475569}
-.legend span{display:flex;align-items:center;gap:2px}
-.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;font-size:10px;color:#475569}
+.legend span{display:flex;align-items:center;gap:4px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 
-/* Reuse for other panels */
-.cap-box{background:rgba(255,255,255,0.03);border-radius:6px;padding:10px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.cap-box label{font-size:9px;color:#334155}.cap-box input{background:#060a14;border:1px solid #1e293b;border-radius:4px;padding:5px 7px;color:#e2e8f0;font-size:13px;font-weight:700;width:130px;outline:none}
-.cr{flex:1;text-align:right}.cr .a{font-size:18px;font-weight:800;color:#22c55e}.cr .p{font-size:9px;color:#334155}
-.warn{border-radius:5px;padding:6px 8px;margin-bottom:8px;font-size:8px;line-height:1.3}
-.warn-y{background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);color:#fbbf24}
-.warn-r{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);color:#fca5a5}
-h2{font-size:12px;font-weight:700;color:#f8fafc;margin-bottom:6px}
-.steps{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-.step{background:rgba(255,255,255,0.012);border-radius:6px;padding:7px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:all .1s}
-.step:hover{background:rgba(255,255,255,0.03)}.step.active{background:rgba(255,255,255,0.04)}
-.sh{display:flex;align-items:center;gap:6px}
-.sn{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:9px;color:#fff;flex-shrink:0}
-.si{flex:1}.st{font-weight:700;font-size:10px;color:#f8fafc}.sa{font-size:8px;color:#334155}
-.stags{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
-.stag{padding:1px 3px;border-radius:2px;font-size:7px;font-weight:700}
-.sd{margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,0.04);font-size:8px;color:#64748b;line-height:1.3;display:none}
+/* Panels */
+.cap-box{background:#fff;border-radius:8px;padding:14px;margin-bottom:10px;border:1px solid #e2e8f0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.cap-box label{font-size:11px;color:#475569}.cap-box input{background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:7px 10px;color:#0f172a;font-size:15px;font-weight:700;width:150px;outline:none}
+.cap-box input:focus{border-color:#2563eb}
+.cr{flex:1;text-align:right}.cr .a{font-size:22px;font-weight:800;color:#15803d}.cr .p{font-size:11px;color:#64748b}
+.warn{border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:11px;line-height:1.5}
+.warn-y{background:#fffbeb;border:1px solid #fcd34d;color:#92400e}
+.warn-r{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b}
+h2{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px}
+.steps{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.step{background:#fff;border-radius:8px;padding:10px;border:1px solid #e2e8f0;cursor:pointer;transition:all .12s;box-shadow:0 1px 2px rgba(0,0,0,0.03)}
+.step:hover{background:#f8fafc;border-color:#cbd5e1}.step.active{background:#f1f5f9;border-color:#94a3b8}
+.sh{display:flex;align-items:center;gap:8px}
+.sn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;flex-shrink:0}
+.si{flex:1}.st{font-weight:700;font-size:13px;color:#0f172a}.sa{font-size:11px;color:#64748b}
+.stags{display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end}
+.stag{padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
+.sd{margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;font-size:11px;color:#475569;line-height:1.5;display:none}
 .step.active .sd{display:block}
-.se{margin-top:2px}.se .v{color:#22c55e;font-weight:700}
-.tip{margin-top:2px;padding:2px 4px;background:rgba(34,197,94,0.04);border-radius:2px;border:1px solid rgba(34,197,94,0.08);color:#86efac;font-size:7px}
-.beat{color:#22c55e;font-weight:600}.miss{color:#ef4444;font-weight:600}
-.bull{color:#22c55e}.ttype{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px}
-.ttype-stock{background:#3b82f610;color:#60a5fa}.ttype-etf{background:#f59e0b10;color:#fbbf24}
+.se{margin-top:3px}.se .v{color:#15803d;font-weight:700;font-size:12px}
+.tip{margin-top:3px;padding:4px 8px;background:#f0fdf4;border-radius:4px;border:1px solid #86efac;color:#15803d;font-size:10px}
+.beat{color:#15803d;font-weight:600}.miss{color:#dc2626;font-weight:600}
+.bull{color:#15803d}.ttype{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px}
+.ttype-stock{background:#dbeafe;color:#1e40af}.ttype-etf{background:#fef3c7;color:#92400e}
 
-.footer{margin-top:14px;padding:6px;background:rgba(255,255,255,0.01);border-radius:4px;font-size:7px;color:#1e293b;line-height:1.3}
+.footer{margin-top:18px;padding:10px;background:#fff;border-radius:6px;border:1px solid #e2e8f0;font-size:10px;color:#64748b;line-height:1.5}
 .footer strong{color:#334155}
-.counter{font-size:9px;color:#475569;margin-bottom:4px}
+.counter{font-size:11px;color:#475569;margin-bottom:6px}
 
-@media(max-width:700px){.cap-box{flex-direction:column;align-items:stretch}.cr{text-align:left}.sh{flex-wrap:wrap}.stags{justify-content:flex-start;margin-top:2px}table{font-size:8px}}
+@media(max-width:700px){.cap-box{flex-direction:column;align-items:stretch}.cr{text-align:left}.sh{flex-wrap:wrap}.stags{justify-content:flex-start;margin-top:3px}table{font-size:10px}}
 </style>
 </head>
 <body>
 <div class="ctr">
 <div class="hdr">
   <h1>Stock Playbook</h1>
-  <p class="sub">Dividends + Earnings + Fundamentals + Technical Analysis — USA &amp; Canada</p>
-  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span></div>
+  <p class="sub">Dividends + Earnings + Fundamentals + Technical Analysis + Income Planner — USA &amp; Canada</p>
+  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span><span class="bdg" style="background:#ec489918;color:#ec4899;border:1px solid #ec489940">INCOME PLANNER</span></div>
 </div>
 <div class="ctabs">
   <div class="ctab on-ca" id="cCA" onclick="sc('ca')"><span class="fl">🇨🇦</span>Canada TSX</div>
@@ -115,11 +117,12 @@ h2{font-size:12px;font-weight:700;color:#f8fafc;margin-bottom:6px}
   <div class="stab" id="sE" onclick="ss('earn')">📈 Earnings</div>
   <div class="stab" id="sF" onclick="ss('fund')">⭐ Top Picks</div>
   <div class="stab" id="sT" onclick="ss('tech')">📊 Technicals</div>
+  <div class="stab" id="sI" onclick="ss('income')">🎯 Income Planner</div>
 </div>
 
-<!-- 8 PANELS -->
-<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div>
-<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div>
+<!-- 10 PANELS -->
+<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div><div class="pnl" id="p-ca-income"></div>
+<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div><div class="pnl" id="p-us-income"></div>
 
 <div class="footer">
   <strong>Disclaimer:</strong> Not financial advice. All data approximate as of Mar 19, 2026. Technical signals are derived from estimated SMA/BB calculations based on recent price action research — they are NOT real-time. Verify all data with your broker. Stocks can drop on ex-dates and after earnings. Past performance ≠ future results. Consult a qualified financial advisor.
@@ -311,8 +314,8 @@ let country="ca",strat="div";
 let ST={};
 
 function sc(c){country=c;document.getElementById("cCA").className=c==="ca"?"ctab on-ca":"ctab";document.getElementById("cUS").className=c==="us"?"ctab on-us":"ctab";show();}
-function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT"}[s]).className="stab on";show();}
-function show(){["ca-div","ca-earn","ca-fund","ca-tech","us-div","us-earn","us-fund","us-tech"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
+function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT",income:"sI"}[s]).className="stab on";show();}
+function show(){["ca-div","ca-earn","ca-fund","ca-tech","ca-income","us-div","us-earn","us-fund","us-tech","us-income"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
 
 function ap(s){return(s.qDiv*4)/(parseFloat(s.yield)/100);}
 function esd(ts,ss2,cap){let d=0;const p=cap/ts.length;ts.forEach(t=>{const s=ss2.find(x=>x.ticker===t);if(s&&s.qDiv){d+=Math.floor(p/ap(s))*s.qDiv;}});return d;}
@@ -365,7 +368,7 @@ function renderEarnTable(key){const d=PREV[key],s=ST[key];const sorted=[...d.sto
   const cols=[{k:"ticker",l:"Ticker"},{k:"sector",l:"Sector"},{k:"lastResult",l:"Result"},{k:"avgMove",l:"Move"},{k:"streak",l:"Streak"},{k:"nextDate",l:"Report"},{k:"strategy",l:"Strategy"}];
   const th=document.getElementById("th-"+key);th.innerHTML="";cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.l+(s.sort.col===c.k?(s.sort.asc?" ↑":" ↓"):"");h.onclick=()=>{if(s.sort.col===c.k)s.sort.asc=!s.sort.asc;else{s.sort.col=c.k;s.sort.asc=false;}renderEarnTable(key);};th.appendChild(h);});
   const tb=document.getElementById("tb-"+key);tb.innerHTML="";sorted.forEach((st,i)=>{const isHL=hl.includes(st.ticker);const tr=document.createElement("tr");if(i%2===0)tr.classList.add("ev");if(isHL){tr.classList.add("hl");tr.style.borderLeftColor=scc;tr.style.background=scc+"12";}
-    tr.innerHTML=`<td class="tt" style="color:${isHL?scc:'#e2e8f0'}">${st.ticker}</td><td class="ts"><span>${st.sector}</span></td><td class="${st.lastResult==='beat'?'beat':'miss'}">${st.lastResult==='beat'?'✅':'❌'}</td><td style="font-weight:700;color:${parseFloat(st.avgMove)>=5?'#22c55e':'#94a3b8'}">±${st.avgMove}</td><td style="color:#334155;font-size:7px">${st.streak}</td><td style="color:#fbbf24;font-size:8px">${st.nextDate}</td><td style="color:#334155;font-size:7px">${st.strategy}</td>`;
+    tr.innerHTML=`<td class="tt" style="color:${isHL?scc:'#0f172a'}">${st.ticker}</td><td class="ts"><span>${st.sector}</span></td><td class="${st.lastResult==='beat'?'beat':'miss'}">${st.lastResult==='beat'?'✅':'❌'}</td><td style="font-weight:700;color:${parseFloat(st.avgMove)>=5?'#15803d':'#334155'}">±${st.avgMove}</td><td style="color:#475569">${st.streak}</td><td style="color:#b45309;font-weight:600">${st.nextDate}</td><td style="color:#475569">${st.strategy}</td>`;
     tb.appendChild(tr);});
 }
 
@@ -407,19 +410,19 @@ function renderTechTable(key,data){
     // Trend color
     const tc=st.trend.includes("Strong Up")?"trend-su":st.trend.includes("Up")?"trend-u":st.trend==="Sideways"?"trend-sw":st.trend.includes("Strong Down")?"trend-sd":"trend-d";
     // Cross color
-    const cc=st.cross==="Golden"?"color:#22c55e":"color:#ef4444";
+    const cc=st.cross==="Golden"?"color:#15803d":"color:#dc2626";
     // BB color
-    const bbc=st.bbPos>80?"color:#ef4444":st.bbPos<20?"color:#3b82f6":"color:#94a3b8";
+    const bbc=st.bbPos>80?"color:#dc2626":st.bbPos<20?"color:#1e40af":"color:#475569";
     // Signal color
     const sigC=st.sigScore>=8?"sig-sb":st.sigScore>=6?"sig-b":st.sigScore>=4?"sig-h":"sig-s";
     // Action class
     const actC=st.action==="Buy"?"act-buy":st.action==="Hold"?"act-hold":st.action==="Sell"?"act-sell":st.action==="Short"?"act-short":"act-cover";
     // SMA bar
-    const smaBar=`<div style="display:flex;gap:1px">${[...Array(6)].map((_,j)=>`<div style="width:6px;height:10px;border-radius:1px;background:${j<st.smaScore?'#22c55e':'#1e293b'}"></div>`).join("")}</div>`;
+    const smaBar=`<div style="display:flex;gap:2px">${[...Array(6)].map((_,j)=>`<div style="width:8px;height:12px;border-radius:2px;background:${j<st.smaScore?'#16a34a':'#e2e8f0'}"></div>`).join("")}</div>`;
     // Sig bar
-    const sigBar=`<div style="display:flex;gap:1px">${[...Array(10)].map((_,j)=>`<div style="width:4px;height:8px;border-radius:1px;background:${j<st.sigScore?(st.sigScore>=8?'#22c55e':st.sigScore>=6?'#4ade80':st.sigScore>=4?'#fbbf24':'#ef4444'):'#1e293b'}"></div>`).join("")}</div>`;
+    const sigBar=`<div style="display:flex;gap:2px;margin-top:2px">${[...Array(10)].map((_,j)=>`<div style="width:6px;height:10px;border-radius:2px;background:${j<st.sigScore?(st.sigScore>=8?'#16a34a':st.sigScore>=6?'#22c55e':st.sigScore>=4?'#d97706':'#dc2626'):'#e2e8f0'}"></div>`).join("")}</div>`;
 
-    tr.innerHTML=`<td class="tt">${st.ticker}</td><td class="tn2" style="font-size:8px">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td class="${tc}" style="font-weight:600;font-size:8px">${st.trend}</td><td>${smaBar}</td><td style="${cc};font-weight:600;font-size:8px">${st.cross}</td><td style="${bbc};font-weight:600">${st.bbPos}%</td><td><div class="${sigC}">${st.sigScore}/10</div>${sigBar}</td><td><span class="${actC}">${st.action}</span></td><td class="reason">${st.reason}</td>`;
+    tr.innerHTML=`<td class="tt">${st.ticker}</td><td class="tn2">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td class="${tc}" style="font-weight:600">${st.trend}</td><td>${smaBar}</td><td style="${cc};font-weight:700">${st.cross}</td><td style="${bbc};font-weight:700">${st.bbPos}%</td><td><div class="${sigC}">${st.sigScore}/10</div>${sigBar}</td><td><span class="${actC}">${st.action}</span></td><td class="reason">${st.reason}</td>`;
     tb.appendChild(tr);
   });
 }
@@ -477,8 +480,213 @@ function renderFundTable(key,data){const s=ST[key];let list=[...data];if(s.filte
   const th=document.getElementById("th-"+key);th.innerHTML="";cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.l+(s.sort.col===c.k?(s.sort.asc?" ↑":" ↓"):"");h.onclick=()=>{if(s.sort.col===c.k)s.sort.asc=!s.sort.asc;else{s.sort.col=c.k;s.sort.asc=false;}renderFundTable(key,data);};th.appendChild(h);});
   const tb=document.getElementById("tb-"+key);tb.innerHTML="";list.forEach((st,i)=>{const tr=document.createElement("tr");if(i%2===0)tr.classList.add("ev");
     const rc=st.rating.includes("Strong")?"#22c55e":"#60a5fa";
-    tr.innerHTML=`<td class="tt">${st.ticker}</td><td class="tn2">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td style="color:${rc};font-weight:700;font-size:8px">${st.rating}</td><td class="bull" style="font-weight:700">${st.upside}</td><td style="color:#fbbf24;font-size:8px">${st.timeframe}</td><td style="color:#64748b;font-size:7px;max-width:120px">${st.catalyst}</td><td style="color:#334155;font-size:7px;max-width:120px">${st.thesis}</td>`;
+    tr.innerHTML=`<td class="tt">${st.ticker}</td><td class="tn2">${st.name}</td><td class="ts"><span>${st.sector}</span></td><td style="color:${rc};font-weight:700">${st.rating}</td><td class="bull" style="font-weight:700">${st.upside}</td><td style="color:#b45309;font-weight:600">${st.timeframe}</td><td style="color:#475569;max-width:160px">${st.catalyst}</td><td style="color:#475569;max-width:160px">${st.thesis}</td>`;
     tb.appendChild(tr);});
+}
+
+/* ═══ INCOME PLANNER ═══ */
+const INCOME_CA = {
+  currency:"C$",label:"Canada",
+  holdings:[
+    {ticker:"HDIV",name:"Hamilton Enh CDN CC ETF",yield:10.5,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium-High",notes:"Covered call + 1.25x leverage on TSX; ~$0.183/unit monthly"},
+    {ticker:"HYLD",name:"Hamilton Enh US CC ETF",yield:12.6,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium-High",notes:"Same strategy on US equities; CAD-hedged; highest yield"},
+    {ticker:"HMAX",name:"Hamilton CDN Fin YieldMax",yield:13.0,freq:"Monthly",sector:"CC ETF",role:"Income Booster",risk:"Higher",notes:"Concentrated in CDN financials; very high yield but sector risk"},
+    {ticker:"ENB",name:"Enbridge",yield:6.5,freq:"Quarterly",sector:"Pipeline",role:"Core Income",risk:"Low-Medium",notes:"31yr dividend streak; regulated pipelines; oil volume tailwind"},
+    {ticker:"TRP",name:"TC Energy",yield:5.8,freq:"Quarterly",sector:"Pipeline",role:"Core Income",risk:"Low-Medium",notes:"Post-spinoff; regulated assets; infrastructure supercycle"},
+    {ticker:"PPL",name:"Pembina Pipeline",yield:5.2,freq:"Monthly",sector:"Pipeline",role:"Core Income",risk:"Low-Medium",notes:"Monthly payer; NGL infrastructure; stable cash flows"},
+    {ticker:"RY",name:"Royal Bank",yield:2.9,freq:"Quarterly",sector:"Bank",role:"Growth + Income",risk:"Low",notes:"Canada's largest; most consistent earner; dividend growth 8%/yr"},
+    {ticker:"BMO",name:"Bank of Montreal",yield:4.7,freq:"Quarterly",sector:"Bank",role:"Growth + Income",risk:"Low",notes:"US expansion; $1.55/quarter — highest bank payout per share"},
+    {ticker:"NA",name:"National Bank",yield:2.6,freq:"Quarterly",sector:"Bank",role:"Growth + Income",risk:"Low",notes:"CWB integration; ROE 16%; fastest growing big bank"},
+    {ticker:"SLF",name:"Sun Life Financial",yield:5.2,freq:"Quarterly",sector:"Insurance",role:"Core Income",risk:"Low-Medium",notes:"MFS + Asia; consistent earner; pays end of quarter"},
+    {ticker:"MFC",name:"Manulife Financial",yield:4.3,freq:"Quarterly",sector:"Insurance",role:"Core Income",risk:"Low-Medium",notes:"Asia wealth growth; high ROE; beat 7/8 quarters"},
+    {ticker:"GWO",name:"Great-West Lifeco",yield:4.1,freq:"Quarterly",sector:"Insurance",role:"Core Income",risk:"Low-Medium",notes:"Empower US retirement; record earnings; 10% dividend raise"},
+    {ticker:"FTS",name:"Fortis Inc",yield:3.8,freq:"Quarterly",sector:"Utility",role:"Defensive",risk:"Low",notes:"51yr dividend streak; regulated utility; rate-cut beneficiary"},
+    {ticker:"BIP.UN",name:"Brookfield Infrastructure",yield:4.8,freq:"Quarterly",sector:"Infrastructure",role:"Core Income",risk:"Low-Medium",notes:"Global infrastructure; toll roads/ports/data; monthly-like stability"},
+    {ticker:"WCP",name:"Whitecap Resources",yield:6.7,freq:"Monthly",sector:"Energy",role:"Income Booster",risk:"Medium",notes:"Monthly payer; oil producer; 5.4% yield; oil boom tailwind"},
+    {ticker:"BCE",name:"BCE Inc",yield:11.8,freq:"Quarterly",sector:"Telecom",role:"High Yield",risk:"Higher",notes:"⚠️ Dividend cut risk; death cross; include only if accepting risk"},
+    {ticker:"ZWC",name:"BMO CDN High Div CC ETF",yield:7.8,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium",notes:"Covered call on CDN dividend stocks; lower risk than HDIV"},
+  ],
+  models:[
+    {name:"Conservative",desc:"Blue-chip stocks only — banks, pipelines, utilities, insurance",yield:4.5,capital:533333,
+     alloc:[{ticker:"ENB",pct:12},{ticker:"TRP",pct:10},{ticker:"PPL",pct:8},{ticker:"RY",pct:10},{ticker:"BMO",pct:8},{ticker:"NA",pct:7},{ticker:"SLF",pct:10},{ticker:"MFC",pct:8},{ticker:"GWO",pct:7},{ticker:"FTS",pct:10},{ticker:"BIP.UN",pct:10}]},
+    {name:"Balanced (Recommended)",desc:"Mix of stocks + covered call ETFs for higher yield with moderate risk",yield:7.5,capital:320000,
+     alloc:[{ticker:"HDIV",pct:15},{ticker:"HYLD",pct:15},{ticker:"ENB",pct:10},{ticker:"TRP",pct:10},{ticker:"RY",pct:7},{ticker:"BMO",pct:8},{ticker:"SLF",pct:8},{ticker:"MFC",pct:7},{ticker:"FTS",pct:5},{ticker:"BIP.UN",pct:5},{ticker:"WCP",pct:5},{ticker:"PPL",pct:5}]},
+    {name:"Aggressive Income",desc:"Heavy covered call ETFs + high yield — maximum income, less growth",yield:10.5,capital:228571,
+     alloc:[{ticker:"HDIV",pct:20},{ticker:"HYLD",pct:20},{ticker:"HMAX",pct:10},{ticker:"ZWC",pct:10},{ticker:"ENB",pct:8},{ticker:"BCE",pct:7},{ticker:"WCP",pct:7},{ticker:"SLF",pct:6},{ticker:"MFC",pct:6},{ticker:"BIP.UN",pct:6}]},
+  ]
+};
+
+const INCOME_US = {
+  currency:"US$",label:"USA",
+  holdings:[
+    {ticker:"JEPQ",name:"JPMorgan Nasdaq Eq Premium",yield:11.4,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium-High",notes:"Covered calls on Nasdaq-100; tech-heavy; highest yield"},
+    {ticker:"JEPI",name:"JPMorgan Eq Premium Income",yield:8.1,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium",notes:"Covered calls on S&P 500 blue chips; $34B AUM; steady"},
+    {ticker:"QYLD",name:"Global X Nasdaq 100 CC",yield:10.8,freq:"Monthly",sector:"CC ETF",role:"Income Booster",risk:"Medium-High",notes:"100% ATM calls on Nasdaq; high yield but capped upside"},
+    {ticker:"XYLD",name:"Global X S&P 500 CC",yield:9.5,freq:"Monthly",sector:"CC ETF",role:"Income Base",risk:"Medium",notes:"S&P 500 covered calls; more diversified than QYLD"},
+    {ticker:"O",name:"Realty Income",yield:5.8,freq:"Monthly",sector:"REIT",role:"Core Income",risk:"Low-Medium",notes:"Monthly dividend aristocrat; 113 consecutive quarterly increases"},
+    {ticker:"MAIN",name:"Main Street Capital",yield:5.2,freq:"Monthly",sector:"BDC",role:"Core Income",risk:"Medium",notes:"BDC lending to middle-market companies; monthly + special divs"},
+    {ticker:"EPD",name:"Enterprise Products",yield:5.9,freq:"Quarterly",sector:"Midstream",role:"Core Income",risk:"Low-Medium",notes:"26yr dividend growth; largest US midstream; NGL infrastructure"},
+    {ticker:"XOM",name:"Exxon Mobil",yield:2.7,freq:"Quarterly",sector:"Energy",role:"Growth + Income",risk:"Medium",notes:"Oil super-major; 44yr dividend streak; $97 WTI windfall"},
+    {ticker:"ABBV",name:"AbbVie",yield:3.1,freq:"Quarterly",sector:"Pharma",role:"Growth + Income",risk:"Low-Medium",notes:"Dividend aristocrat; Skyrizi/Rinvoq growing 50%+; 12yr raises"},
+    {ticker:"VZ",name:"Verizon",yield:5.8,freq:"Quarterly",sector:"Telecom",role:"High Yield",risk:"Medium",notes:"5.8% yield; defensive telecom; slow but steady"},
+    {ticker:"MO",name:"Altria Group",yield:6.8,freq:"Quarterly",sector:"Consumer",role:"High Yield",risk:"Medium",notes:"Tobacco king; 6.8% yield; counter-cyclical; 55yr dividend raises"},
+    {ticker:"PG",name:"Procter & Gamble",yield:2.8,freq:"Quarterly",sector:"Consumer",role:"Defensive",risk:"Low",notes:"135yr dividend history; king of consumer staples; pricing power"},
+    {ticker:"JPM",name:"JPMorgan Chase",yield:2.1,freq:"Quarterly",sector:"Bank",role:"Growth + Income",risk:"Low-Medium",notes:"Best US bank; trading revenue from Iran vol; Dimon leadership"},
+    {ticker:"KO",name:"Coca-Cola",yield:2.7,freq:"Quarterly",sector:"Consumer",role:"Defensive",risk:"Low",notes:"62yr consecutive dividend raises; Buffett's favorite"},
+    {ticker:"DIVO",name:"Amplify CWP Enh Div Income",yield:4.5,freq:"Monthly",sector:"CC ETF",role:"Balanced",risk:"Medium",notes:"Selective covered calls; better total return than pure CC ETFs"},
+  ],
+  models:[
+    {name:"Conservative",desc:"Dividend aristocrats + REITs — quality over yield",yield:4.0,capital:600000,
+     alloc:[{ticker:"O",pct:10},{ticker:"EPD",pct:10},{ticker:"XOM",pct:10},{ticker:"ABBV",pct:10},{ticker:"PG",pct:10},{ticker:"KO",pct:10},{ticker:"JPM",pct:10},{ticker:"VZ",pct:10},{ticker:"MO",pct:10},{ticker:"MAIN",pct:10}]},
+    {name:"Balanced (Recommended)",desc:"Stocks + CC ETFs — good yield with some growth",yield:7.0,capital:342857,
+     alloc:[{ticker:"JEPI",pct:15},{ticker:"JEPQ",pct:12},{ticker:"DIVO",pct:8},{ticker:"O",pct:8},{ticker:"MAIN",pct:7},{ticker:"EPD",pct:8},{ticker:"ABBV",pct:8},{ticker:"XOM",pct:7},{ticker:"VZ",pct:7},{ticker:"MO",pct:7},{ticker:"JPM",pct:7},{ticker:"PG",pct:6}]},
+    {name:"Aggressive Income",desc:"Heavy CC ETFs — maximum yield, limited growth",yield:10.0,capital:240000,
+     alloc:[{ticker:"JEPQ",pct:22},{ticker:"JEPI",pct:18},{ticker:"QYLD",pct:12},{ticker:"XYLD",pct:10},{ticker:"O",pct:8},{ticker:"MAIN",pct:8},{ticker:"MO",pct:7},{ticker:"VZ",pct:8},{ticker:"EPD",pct:7}]},
+  ]
+};
+
+function buildIncomePanel(key,data){
+  const panel=document.getElementById("p-"+key);
+  const cur=data.currency;
+  let h=`
+  <div class="info" style="background:#fdf2f8;border:1px solid #f9a8d4;color:#9d174d">
+    <strong>🎯 Income Planner — ${data.label}</strong> | How much capital do you need for your target monthly dividend income? Choose a strategy, adjust your target, and see the exact portfolio breakdown.
+  </div>
+
+  <!-- TARGET INPUT -->
+  <div class="cap-box" style="border-color:#f9a8d4">
+    <div>
+      <label style="color:#9d174d;font-weight:700">Target Monthly Income (${cur})</label>
+      <input type="number" id="inc-target-${key}" value="2000" oninput="calcIncome('${key}')" style="border-color:#f9a8d4;font-size:18px;width:160px">
+    </div>
+    <div class="cr">
+      <div style="font-size:10px;color:#9d174d">Annual Income Needed</div>
+      <div class="a" id="inc-annual-${key}" style="color:#9d174d">${cur}24,000</div>
+    </div>
+  </div>
+
+  <!-- STRATEGY SELECTOR -->
+  <h2>Choose Your Strategy</h2>
+  <div class="steps" id="inc-models-${key}"></div>
+
+  <!-- RESULT BOX -->
+  <div id="inc-result-${key}" style="background:#fff;border:2px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:14px"></div>
+
+  <!-- HOLDINGS TABLE -->
+  <h2>Available Dividend Holdings</h2>
+  <p class="tn" style="margin-bottom:4px">All holdings available for building your income portfolio. Sorted by yield.</p>
+  <div class="tw"><table><thead><tr id="th-${key}"></tr></thead><tbody id="tb-${key}"></tbody></table></div>
+
+  <!-- TAX TIP -->
+  <div class="info" style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;margin-top:10px">
+    <strong>💡 Tax Optimization Tips (${data.label}):</strong><br>
+    ${key.includes('ca')?
+    '• <strong>TFSA first</strong> ($95K+ room) — all Canadian dividends completely tax-free<br>• <strong>RRSP second</strong> — tax-deferred growth; no annual tax on dividends<br>• <strong>Non-registered</strong> — eligible Canadian dividends get enhanced tax credit (~0% effective tax up to ~$55K income in Ontario)<br>• Hold REITs in registered accounts (TFSA/RRSP) to avoid complex tax treatment<br>• Covered call ETF distributions may include return of capital — track ACB carefully':
+    '• <strong>RRSP is best for US dividends</strong> — 15% US withholding tax is waived under Canada-US tax treaty<br>• <strong>TFSA does NOT waive</strong> US withholding tax — you lose 15% on all US dividends in TFSA<br>• Non-registered accounts: claim foreign tax credit on your Canadian tax return<br>• US REITs and BDCs generate ordinary income — hold in RRSP if possible<br>• Currency risk: consider CAD-hedged ETFs (e.g., HYLD.TO) to avoid USD/CAD fluctuation'}
+  </div>`;
+
+  panel.innerHTML=h;
+  ST[key]={sort:{col:"yield",asc:false},model:1}; // default to Balanced
+  renderIncomeModels(key,data);
+  calcIncome(key);
+  renderIncomeTable(key,data);
+}
+
+function renderIncomeModels(key,data){
+  const c=document.getElementById("inc-models-"+key);c.innerHTML="";
+  const colors=["#16a34a","#2563eb","#dc2626"];
+  data.models.forEach((m,i)=>{
+    const isActive=ST[key].model===i;
+    const dv=document.createElement("div");
+    dv.className="step"+(isActive?" active":"");
+    if(isActive)dv.style.borderColor=colors[i];
+    const isRec=m.name.includes("Recommended");
+    dv.innerHTML=`<div class="sh"><div class="sn" style="background:${colors[i]}">${i+1}</div><div class="si"><div class="st">${m.name} ${isRec?'⭐':''}</div><div class="sa">${m.desc}</div></div><div class="stags"><span class="stag" style="background:${colors[i]}18;color:${colors[i]};border:1px solid ${colors[i]}33">~${m.yield}% yield</span></div></div>`;
+    dv.onclick=()=>{ST[key].model=i;renderIncomeModels(key,data);calcIncome(key);};
+    c.appendChild(dv);
+  });
+}
+
+function calcIncome(key){
+  const data=key.includes("ca")?INCOME_CA:INCOME_US;
+  const target=Number(document.getElementById("inc-target-"+key).value)||2000;
+  const annual=target*12;
+  const cur=data.currency;
+  document.getElementById("inc-annual-"+key).textContent=cur+annual.toLocaleString();
+
+  const model=data.models[ST[key].model];
+  const capitalNeeded=Math.ceil(annual/(model.yield/100));
+
+  // Build allocation table
+  let rows="";let totalPct=0;let monthlyTotal=0;
+  model.alloc.forEach(a=>{
+    const h=data.holdings.find(x=>x.ticker===a.ticker);
+    if(!h)return;
+    const dollarAmt=Math.round(capitalNeeded*a.pct/100);
+    const annualDiv=dollarAmt*h.yield/100;
+    const monthlyDiv=annualDiv/12;
+    monthlyTotal+=monthlyDiv;
+    totalPct+=a.pct;
+    const freqIcon=h.freq==="Monthly"?"📅":"📆";
+    rows+=`<tr style="border-bottom:1px solid #f1f5f9">
+      <td style="font-weight:700;color:#0f172a">${h.ticker}</td>
+      <td style="color:#475569">${h.name}</td>
+      <td style="color:#0f172a;font-weight:600">${a.pct}%</td>
+      <td style="color:#0f172a;font-weight:700">${cur}${dollarAmt.toLocaleString()}</td>
+      <td style="color:#15803d;font-weight:700">${h.yield}%</td>
+      <td>${freqIcon} ${h.freq}</td>
+      <td style="color:#15803d;font-weight:700">${cur}${monthlyDiv.toFixed(0)}/mo</td>
+    </tr>`;
+  });
+
+  const resultBox=document.getElementById("inc-result-"+key);
+  resultBox.innerHTML=`
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="flex:1;min-width:150px;text-align:center;padding:12px;background:#fdf2f8;border-radius:8px">
+        <div style="font-size:10px;color:#9d174d;font-weight:600">CAPITAL NEEDED</div>
+        <div style="font-size:26px;font-weight:900;color:#9d174d">${cur}${capitalNeeded.toLocaleString()}</div>
+      </div>
+      <div style="flex:1;min-width:150px;text-align:center;padding:12px;background:#f0fdf4;border-radius:8px">
+        <div style="font-size:10px;color:#15803d;font-weight:600">MONTHLY INCOME</div>
+        <div style="font-size:26px;font-weight:900;color:#15803d">${cur}${Math.round(monthlyTotal).toLocaleString()}</div>
+      </div>
+      <div style="flex:1;min-width:150px;text-align:center;padding:12px;background:#eff6ff;border-radius:8px">
+        <div style="font-size:10px;color:#1e40af;font-weight:600">BLENDED YIELD</div>
+        <div style="font-size:26px;font-weight:900;color:#1e40af">${model.yield}%</div>
+      </div>
+    </div>
+    <h2 style="font-size:13px;margin-bottom:6px">Portfolio Allocation — ${model.name}</h2>
+    <div class="tw"><table style="font-size:11px">
+      <thead><tr style="border-bottom:2px solid #cbd5e1;background:#f8fafc">
+        <th style="cursor:default">Ticker</th><th style="cursor:default">Name</th><th style="cursor:default">Weight</th><th style="cursor:default">Amount</th><th style="cursor:default">Yield</th><th style="cursor:default">Frequency</th><th style="cursor:default">Income</th>
+      </tr></thead>
+      <tbody>${rows}
+        <tr style="border-top:2px solid #0f172a;font-weight:800;background:#f1f5f9">
+          <td colspan="2" style="color:#0f172a">TOTAL</td><td style="color:#0f172a">${totalPct}%</td><td style="color:#0f172a">${cur}${capitalNeeded.toLocaleString()}</td><td style="color:#15803d">${model.yield}%</td><td></td><td style="color:#15803d;font-size:13px">${cur}${Math.round(monthlyTotal).toLocaleString()}/mo</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div style="margin-top:10px;padding:8px;background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;font-size:10px;color:#92400e">
+      <strong>📊 Build-Up Path:</strong> If you don't have ${cur}${capitalNeeded.toLocaleString()} today, invest ${cur}${Math.round(capitalNeeded/60).toLocaleString()}/month for ~5 years with DRIP reinvestment to reach this goal. Start in TFSA${key.includes('us')?' (use RRSP for US stocks)':''} for maximum tax efficiency.
+    </div>
+  `;
+}
+
+function renderIncomeTable(key,data){
+  const s=ST[key];
+  const sorted=[...data.holdings].sort((a,b)=>s.sort.asc?a.yield-b.yield:b.yield-a.yield);
+  const cols=[{k:"ticker",l:"Ticker"},{k:"name",l:"Name"},{k:"yield",l:"Yield %"},{k:"freq",l:"Frequency"},{k:"sector",l:"Sector"},{k:"role",l:"Role"},{k:"risk",l:"Risk"},{k:"notes",l:"Notes"}];
+  const th=document.getElementById("th-"+key);th.innerHTML="";
+  cols.forEach(c=>{const h=document.createElement("th");h.textContent=c.l+(s.sort.col===c.k?(s.sort.asc?" ↑":" ↓"):"");
+    h.onclick=()=>{if(s.sort.col===c.k)s.sort.asc=!s.sort.asc;else{s.sort.col=c.k;s.sort.asc=c.k==="yield"?false:true;}renderIncomeTable(key,data);};th.appendChild(h);});
+  const tb=document.getElementById("tb-"+key);tb.innerHTML="";
+  sorted.forEach((st,i)=>{const tr=document.createElement("tr");if(i%2===0)tr.classList.add("ev");
+    const yc=st.yield>=8?"#15803d":st.yield>=5?"#1e40af":"#475569";
+    const rc=st.risk==="Low"?"#15803d":st.risk==="Low-Medium"?"#1e40af":st.risk==="Medium"?"#b45309":st.risk==="Medium-High"?"#ea580c":"#dc2626";
+    const fc=st.freq==="Monthly"?"📅":"📆";
+    tr.innerHTML=`<td class="tt">${st.ticker}</td><td class="tn2">${st.name}</td><td style="color:${yc};font-weight:700">${st.yield}%</td><td>${fc} ${st.freq}</td><td class="ts"><span>${st.sector}</span></td><td style="font-weight:600;color:#1e40af">${st.role}</td><td style="color:${rc};font-weight:600">${st.risk}</td><td style="color:#475569;max-width:200px;white-space:normal;line-height:1.4">${st.notes}</td>`;
+    tb.appendChild(tr);
+  });
 }
 
 /* ═══ INIT ═══ */
@@ -486,6 +694,7 @@ buildDivPanel("ca-div");buildDivPanel("us-div");
 buildEarnPanel("ca-earn");buildEarnPanel("us-earn");
 buildFundPanel("ca-fund",FUND_CA);buildFundPanel("us-fund",FUND_US);
 buildTechPanel("ca-tech",TSX_TECH);buildTechPanel("us-tech",US_TECH);
+buildIncomePanel("ca-income",INCOME_CA);buildIncomePanel("us-income",INCOME_US);
 show();
 </script>
 </body>

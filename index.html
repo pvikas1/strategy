@@ -106,7 +106,7 @@ h2{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px}
 <div class="hdr">
   <h1>Stock Playbook</h1>
   <p class="sub">Dividends + Earnings + Fundamentals + Technical Analysis + Income Planner — USA &amp; Canada</p>
-  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span><span class="bdg" style="background:#ec489918;color:#ec4899;border:1px solid #ec489940">INCOME PLANNER</span></div>
+  <div class="badges"><span class="bdg bdg-d">DIVIDENDS</span><span class="bdg bdg-e">EARNINGS</span><span class="bdg bdg-f">TOP PICKS</span><span class="bdg bdg-t">TECHNICALS</span><span class="bdg" style="background:#ec489918;color:#ec4899;border:1px solid #ec489940">INCOME PLAN</span><span class="bdg" style="background:#06b6d418;color:#06b6d4;border:1px solid #06b6d440">RETIRE@40</span></div>
 </div>
 <div class="ctabs">
   <div class="ctab on-ca" id="cCA" onclick="sc('ca')"><span class="fl">🇨🇦</span>Canada TSX</div>
@@ -117,12 +117,13 @@ h2{font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px}
   <div class="stab" id="sE" onclick="ss('earn')">📈 Earnings</div>
   <div class="stab" id="sF" onclick="ss('fund')">⭐ Top Picks</div>
   <div class="stab" id="sT" onclick="ss('tech')">📊 Technicals</div>
-  <div class="stab" id="sI" onclick="ss('income')">🎯 Income Planner</div>
+  <div class="stab" id="sI" onclick="ss('income')">🎯 Income Plan</div>
+  <div class="stab" id="sR" onclick="ss('retire')">🏖️ Retire@40</div>
 </div>
 
-<!-- 10 PANELS -->
-<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div><div class="pnl" id="p-ca-income"></div>
-<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div><div class="pnl" id="p-us-income"></div>
+<!-- 12 PANELS -->
+<div class="pnl on" id="p-ca-div"></div><div class="pnl" id="p-ca-earn"></div><div class="pnl" id="p-ca-fund"></div><div class="pnl" id="p-ca-tech"></div><div class="pnl" id="p-ca-income"></div><div class="pnl" id="p-ca-retire"></div>
+<div class="pnl" id="p-us-div"></div><div class="pnl" id="p-us-earn"></div><div class="pnl" id="p-us-fund"></div><div class="pnl" id="p-us-tech"></div><div class="pnl" id="p-us-income"></div><div class="pnl" id="p-us-retire"></div>
 
 <div class="footer">
   <strong>Disclaimer:</strong> Not financial advice. All data approximate as of Mar 19, 2026. Technical signals are derived from estimated SMA/BB calculations based on recent price action research — they are NOT real-time. Verify all data with your broker. Stocks can drop on ex-dates and after earnings. Past performance ≠ future results. Consult a qualified financial advisor.
@@ -314,8 +315,8 @@ let country="ca",strat="div";
 let ST={};
 
 function sc(c){country=c;document.getElementById("cCA").className=c==="ca"?"ctab on-ca":"ctab";document.getElementById("cUS").className=c==="us"?"ctab on-us":"ctab";show();}
-function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT",income:"sI"}[s]).className="stab on";show();}
-function show(){["ca-div","ca-earn","ca-fund","ca-tech","ca-income","us-div","us-earn","us-fund","us-tech","us-income"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
+function ss(s){strat=s;document.querySelectorAll(".stab").forEach(e=>e.className="stab");document.getElementById({div:"sD",earn:"sE",fund:"sF",tech:"sT",income:"sI",retire:"sR"}[s]).className="stab on";show();}
+function show(){["ca-div","ca-earn","ca-fund","ca-tech","ca-income","ca-retire","us-div","us-earn","us-fund","us-tech","us-income","us-retire"].forEach(k=>{document.getElementById("p-"+k).className=(k===country+"-"+strat)?"pnl on":"pnl";});}
 
 function ap(s){return(s.qDiv*4)/(parseFloat(s.yield)/100);}
 function esd(ts,ss2,cap){let d=0;const p=cap/ts.length;ts.forEach(t=>{const s=ss2.find(x=>x.ticker===t);if(s&&s.qDiv){d+=Math.floor(p/ap(s))*s.qDiv;}});return d;}
@@ -689,12 +690,210 @@ function renderIncomeTable(key,data){
   });
 }
 
+/* ═══ RETIRE@40 BUILDER ═══ */
+function buildRetirePanel(key){
+  const isCA=key.includes("ca");
+  const cur=isCA?"C$":"US$";
+  const panel=document.getElementById("p-"+key);
+
+  panel.innerHTML=`
+  <div class="info" style="background:#fef3c7;border:1px solid #fcd34d;color:#78350f">
+    <strong>🏖️ Retire by 40 — Start at 21, Grow Every Month</strong><br>
+    You're 21, starting small ($300/mo), increasing contribution by $20 every month. By 40 you'll have 19 years of compounding. This simulator shows the <strong>exact year-by-year journey</strong> with a phase-based strategy that shifts from growth to income as you age.
+  </div>
+
+  <!-- INPUTS -->
+  <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px">
+    <div><label style="font-size:10px;color:#64748b;display:block;margin-bottom:2px">Current Age</label>
+      <input type="number" id="r-age-${key}" value="21" min="18" max="39" oninput="calcRetire('${key}')" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:6px 8px;width:70px;font-size:14px;font-weight:700;color:#0f172a"></div>
+    <div><label style="font-size:10px;color:#64748b;display:block;margin-bottom:2px">Retire At Age</label>
+      <input type="number" id="r-retire-${key}" value="40" min="30" max="65" oninput="calcRetire('${key}')" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:6px 8px;width:70px;font-size:14px;font-weight:700;color:#0f172a"></div>
+    <div><label style="font-size:10px;color:#64748b;display:block;margin-bottom:2px">Starting Monthly (${cur})</label>
+      <input type="number" id="r-start-${key}" value="300" oninput="calcRetire('${key}')" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:6px 8px;width:100px;font-size:14px;font-weight:700;color:#0f172a"></div>
+    <div><label style="font-size:10px;color:#64748b;display:block;margin-bottom:2px">Monthly Increase (${cur})</label>
+      <input type="number" id="r-inc-${key}" value="20" oninput="calcRetire('${key}')" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:6px 8px;width:80px;font-size:14px;font-weight:700;color:#0f172a"></div>
+    <div><label style="font-size:10px;color:#64748b;display:block;margin-bottom:2px">Target Monthly Income (${cur})</label>
+      <input type="number" id="r-target-${key}" value="2000" oninput="calcRetire('${key}')" style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:6px 8px;width:100px;font-size:14px;font-weight:700;color:#0f172a"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="r-summary-${key}"></div>
+
+  <!-- PHASE STRATEGY -->
+  <div id="r-phases-${key}" style="margin-bottom:12px"></div>
+
+  <!-- CHART -->
+  <h2>📈 Year-by-Year Growth</h2>
+  <div id="r-chart-${key}" style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px;overflow-x:auto"></div>
+
+  <!-- YEAR TABLE -->
+  <h2>📋 Detailed Yearly Breakdown</h2>
+  <div class="tw"><table id="r-table-${key}" style="font-size:11px"></table></div>
+  `;
+
+  calcRetire(key);
+}
+
+function calcRetire(key){
+  const isCA=key.includes("ca");
+  const cur=isCA?"C$":"US$";
+  const startAge=Number(document.getElementById("r-age-"+key).value)||21;
+  const retireAge=Number(document.getElementById("r-retire-"+key).value)||40;
+  const startMonthly=Number(document.getElementById("r-start-"+key).value)||300;
+  const monthlyIncrease=Number(document.getElementById("r-inc-"+key).value)||20;
+  const targetIncome=Number(document.getElementById("r-target-"+key).value)||2000;
+  const years=retireAge-startAge;
+  if(years<1)return;
+
+  // Phase-based returns: aggressive early, balanced mid, income late
+  function getPhase(age){
+    if(age<28)return{name:"Growth Phase",color:"#7c3aed",return:10,divYield:1.5,alloc:"80% Growth ETFs (VFV/QQC) + 20% Dividend Stocks",desc:"Young = time to recover from dips. Maximize growth."};
+    if(age<33)return{name:"Balanced Phase",color:"#2563eb",return:8.5,divYield:3,alloc:"50% Growth + 30% Dividend Stocks + 20% CC ETFs",desc:"Start adding income. Still mostly growth."};
+    if(age<37)return{name:"Transition Phase",color:"#d97706",return:7,divYield:5,alloc:"30% Growth + 40% Dividend Stocks + 30% CC ETFs",desc:"Shift heavily toward income-producing assets."};
+    return{name:"Income Phase",color:"#15803d",return:6,divYield:7.5,alloc:"10% Growth + 40% Dividend Stocks + 50% CC ETFs (HDIV/HYLD)",desc:"Maximize dividend income for retirement."};
+  }
+
+  // Simulate year by year
+  let balance=0;let totalContributed=0;let monthlyContrib=startMonthly;
+  let yearData=[];
+
+  for(let y=0;y<years;y++){
+    const age=startAge+y;
+    const phase=getPhase(age);
+    let yearContrib=0;
+    // 12 months in this year
+    for(let m=0;m<12;m++){
+      balance+=monthlyContrib;
+      yearContrib+=monthlyContrib;
+      totalContributed+=monthlyContrib;
+      // Monthly compounding at annual rate
+      balance*=(1+phase.return/100/12);
+      monthlyContrib+=monthlyIncrease;
+    }
+    const divIncome=balance*phase.divYield/100;
+    const monthlyDivIncome=divIncome/12;
+    yearData.push({year:y+1,age:age+1,phase:phase.name,phaseColor:phase.color,balance:Math.round(balance),yearContrib:Math.round(yearContrib),totalContrib:Math.round(totalContributed),monthlyAtEnd:Math.round(monthlyContrib),growth:Math.round(balance-totalContributed),divYield:phase.divYield,monthlyDivIncome:Math.round(monthlyDivIncome),alloc:phase.alloc,annualReturn:phase.return});
+  }
+
+  const final=yearData[yearData.length-1];
+  const retireMonthlyDiv=final.monthlyDivIncome;
+  const pctOfTarget=Math.round(retireMonthlyDiv/targetIncome*100);
+  const needMore=retireMonthlyDiv<targetIncome;
+
+  // Summary boxes
+  document.getElementById("r-summary-"+key).innerHTML=`
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <div style="flex:1;min-width:130px;text-align:center;padding:12px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:8px">
+        <div style="font-size:9px;color:#6d28d9;font-weight:600">TOTAL INVESTED</div>
+        <div style="font-size:20px;font-weight:900;color:#6d28d9">${cur}${final.totalContrib.toLocaleString()}</div>
+        <div style="font-size:9px;color:#7c3aed">${years} years of contributions</div>
+      </div>
+      <div style="flex:1;min-width:130px;text-align:center;padding:12px;background:#fdf2f8;border:1px solid #f9a8d4;border-radius:8px">
+        <div style="font-size:9px;color:#9d174d;font-weight:600">PORTFOLIO VALUE AT ${retireAge}</div>
+        <div style="font-size:20px;font-weight:900;color:#9d174d">${cur}${final.balance.toLocaleString()}</div>
+        <div style="font-size:9px;color:#be185d">Growth: ${cur}${final.growth.toLocaleString()}</div>
+      </div>
+      <div style="flex:1;min-width:130px;text-align:center;padding:12px;background:${pctOfTarget>=100?'#f0fdf4':'#fef2f2'};border:1px solid ${pctOfTarget>=100?'#86efac':'#fca5a5'};border-radius:8px">
+        <div style="font-size:9px;color:${pctOfTarget>=100?'#15803d':'#991b1b'};font-weight:600">MONTHLY DIV INCOME AT ${retireAge}</div>
+        <div style="font-size:20px;font-weight:900;color:${pctOfTarget>=100?'#15803d':'#991b1b'}">${cur}${retireMonthlyDiv.toLocaleString()}/mo</div>
+        <div style="font-size:9px;color:${pctOfTarget>=100?'#16a34a':'#dc2626'}">${pctOfTarget}% of ${cur}${targetIncome.toLocaleString()} target ${pctOfTarget>=100?'✅':'— need more time or contributions'}</div>
+      </div>
+      <div style="flex:1;min-width:130px;text-align:center;padding:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px">
+        <div style="font-size:9px;color:#1e40af;font-weight:600">FINAL MONTHLY CONTRIBUTION</div>
+        <div style="font-size:20px;font-weight:900;color:#1e40af">${cur}${final.monthlyAtEnd.toLocaleString()}/mo</div>
+        <div style="font-size:9px;color:#2563eb">Started at ${cur}${startMonthly}, +${cur}${monthlyIncrease}/mo</div>
+      </div>
+    </div>
+    ${needMore?`<div style="padding:8px 12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;font-size:10px;color:#991b1b;margin-bottom:10px">
+      <strong>💡 To reach ${cur}${targetIncome.toLocaleString()}/mo:</strong> You'd need ~${cur}${Math.round(targetIncome*12/(final.divYield/100)).toLocaleString()} portfolio at ${final.divYield}% yield. Consider: increasing monthly contribution faster, extending to age ${Math.min(retireAge+3,65)}, or targeting higher-yield investments (CC ETFs).
+    </div>`:''}
+  `;
+
+  // Phase Strategy
+  const phases=[...new Set(yearData.map(y=>y.phase))];
+  let phaseHTML='<h2>🎯 Phase-Based Strategy</h2>';
+  const phaseGroups={};
+  yearData.forEach(y=>{if(!phaseGroups[y.phase])phaseGroups[y.phase]={color:y.phaseColor,ages:[],alloc:y.alloc,ret:y.annualReturn,divY:y.divYield};phaseGroups[y.phase].ages.push(y.age);});
+  phaseHTML+='<div class="steps">';
+  let pi=1;
+  for(const[name,p] of Object.entries(phaseGroups)){
+    const ageRange=p.ages[0]+"-"+p.ages[p.ages.length-1];
+    phaseHTML+=`<div class="step" style="border-left:3px solid ${p.color}"><div class="sh"><div class="sn" style="background:${p.color}">${pi}</div><div class="si"><div class="st">${name} (Age ${ageRange})</div><div class="sa">${p.alloc}</div></div><div class="stags"><span class="stag" style="background:${p.color}15;color:${p.color};border:1px solid ${p.color}30">~${p.ret}% return</span><span class="stag" style="background:${p.color}15;color:${p.color};border:1px solid ${p.color}30">${p.divY}% div yield</span></div></div></div>`;
+    pi++;
+  }
+  phaseHTML+='</div>';
+
+  // Specific holdings per phase
+  if(isCA){
+    phaseHTML+=`<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:12px">
+    <h2 style="font-size:13px">🇨🇦 Recommended Holdings by Phase</h2>
+    <table style="font-size:10px;width:100%;border-collapse:collapse">
+    <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc"><th style="padding:6px;text-align:left;cursor:default">Phase</th><th style="padding:6px;text-align:left;cursor:default">Age</th><th style="padding:6px;text-align:left;cursor:default">Holdings</th><th style="padding:6px;text-align:left;cursor:default">Why</th></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;color:#7c3aed;font-weight:700">Growth</td><td>21-27</td><td style="font-weight:600">VFV (S&P500), XQQ (Nasdaq), SHOP, CSU, ATD</td><td style="color:#475569">Max growth; you have 19 years to recover any dips; compounding is your superpower</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;color:#2563eb;font-weight:700">Balanced</td><td>28-32</td><td style="font-weight:600">VFV + RY, BMO, ENB, MFC, SLF + ZWC (CC ETF)</td><td style="color:#475569">Add dividend growers; banks raise dividends ~8%/yr; start CC ETF allocation</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;color:#d97706;font-weight:700">Transition</td><td>33-36</td><td style="font-weight:600">ENB, TRP, PPL, RY, BMO, SLF, MFC + HDIV, ZWC</td><td style="color:#475569">Heavy shift to income; pipelines + insurance; CC ETFs growing to 30%</td></tr>
+    <tr><td style="padding:6px;color:#15803d;font-weight:700">Income</td><td>37-40</td><td style="font-weight:600">HDIV, HYLD, HMAX, ENB, TRP, PPL, SLF, MFC, FTS, BIP.UN</td><td style="color:#475569">50% in CC ETFs for ~10%+ yield; rest in blue-chip dividends; ready for retirement income</td></tr>
+    </table></div>`;
+  }else{
+    phaseHTML+=`<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:12px">
+    <h2 style="font-size:13px">🇺🇸 Recommended Holdings by Phase</h2>
+    <table style="font-size:10px;width:100%;border-collapse:collapse">
+    <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc"><th style="padding:6px;text-align:left;cursor:default">Phase</th><th style="padding:6px;text-align:left;cursor:default">Age</th><th style="padding:6px;text-align:left;cursor:default">Holdings</th><th style="padding:6px;text-align:left;cursor:default">Why</th></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;color:#7c3aed;font-weight:700">Growth</td><td>21-27</td><td style="font-weight:600">VOO/VTI (S&P500), QQQ (Nasdaq), MSFT, AMZN, NVDA</td><td style="color:#475569">Max growth; time is your edge; ride the AI/tech wave</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9;background:#f8fafc"><td style="padding:6px;color:#2563eb;font-weight:700">Balanced</td><td>28-32</td><td style="font-weight:600">VOO + ABBV, JPM, PG, KO, O + DIVO (CC ETF)</td><td style="color:#475569">Add dividend aristocrats; start selective covered calls</td></tr>
+    <tr style="border-bottom:1px solid #f1f5f9"><td style="padding:6px;color:#d97706;font-weight:700">Transition</td><td>33-36</td><td style="font-weight:600">ABBV, JPM, XOM, EPD, O, MAIN, VZ + JEPI, DIVO</td><td style="color:#475569">Heavy income shift; energy + REITs + BDCs; CC ETFs at 30%</td></tr>
+    <tr><td style="padding:6px;color:#15803d;font-weight:700">Income</td><td>37-40</td><td style="font-weight:600">JEPQ, JEPI, QYLD, O, MAIN, EPD, ABBV, VZ, MO, XOM</td><td style="color:#475569">50% CC ETFs for 8-11%; monthly payers dominate; retirement ready</td></tr>
+    </table></div>`;
+  }
+  document.getElementById("r-phases-"+key).innerHTML=phaseHTML;
+
+  // Visual bar chart
+  const maxBal=final.balance;
+  let chartHTML='<div style="display:flex;align-items:flex-end;gap:3px;height:180px;padding-bottom:20px;position:relative">';
+  yearData.forEach(y=>{
+    const h=Math.max(8,Math.round(y.balance/maxBal*160));
+    const contribH=Math.max(4,Math.round(y.totalContrib/maxBal*160));
+    chartHTML+=`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative" title="Age ${y.age}: ${cur}${y.balance.toLocaleString()}">
+      <div style="font-size:7px;color:#475569;margin-bottom:2px;white-space:nowrap">${y.balance>=100000?(cur+Math.round(y.balance/1000)+'K'):(cur+y.balance.toLocaleString())}</div>
+      <div style="width:100%;max-width:36px;height:${h}px;background:linear-gradient(180deg,${y.phaseColor},${y.phaseColor}88);border-radius:3px 3px 0 0;position:relative">
+        <div style="position:absolute;bottom:0;left:0;right:0;height:${contribH}px;background:${y.phaseColor}33;border-radius:0 0 3px 3px"></div>
+      </div>
+      <div style="font-size:8px;color:#475569;margin-top:2px">${y.age}</div>
+    </div>`;
+  });
+  chartHTML+='</div>';
+  chartHTML+='<div style="display:flex;gap:12px;margin-top:6px;font-size:9px;color:#64748b"><span>■ Darker = Total Portfolio Value</span><span>□ Lighter = Your Contributions</span><span>Difference = Compounding Growth</span></div>';
+  document.getElementById("r-chart-"+key).innerHTML=chartHTML;
+
+  // Year table
+  let tHTML=`<thead><tr style="border-bottom:2px solid #cbd5e1;background:#f8fafc">
+    <th style="padding:6px;cursor:default">Year</th><th style="padding:6px;cursor:default">Age</th><th style="padding:6px;cursor:default">Phase</th><th style="padding:6px;cursor:default">Monthly Contrib</th><th style="padding:6px;cursor:default">Year Contributed</th><th style="padding:6px;cursor:default">Total Contributed</th><th style="padding:6px;cursor:default">Portfolio Value</th><th style="padding:6px;cursor:default">Growth (Compounding)</th><th style="padding:6px;cursor:default">Div Yield</th><th style="padding:6px;cursor:default">Monthly Div Income</th>
+  </tr></thead><tbody>`;
+  yearData.forEach((y,i)=>{
+    tHTML+=`<tr style="border-bottom:1px solid #f1f5f9;${i%2===0?'background:#f8fafc':''}">
+      <td style="padding:5px;font-weight:700">${y.year}</td>
+      <td style="padding:5px">${y.age}</td>
+      <td style="padding:5px;color:${y.phaseColor};font-weight:600;font-size:10px">${y.phase}</td>
+      <td style="padding:5px">${cur}${y.monthlyAtEnd.toLocaleString()}</td>
+      <td style="padding:5px">${cur}${y.yearContrib.toLocaleString()}</td>
+      <td style="padding:5px;font-weight:600">${cur}${y.totalContrib.toLocaleString()}</td>
+      <td style="padding:5px;font-weight:700;color:#9d174d">${cur}${y.balance.toLocaleString()}</td>
+      <td style="padding:5px;color:#15803d;font-weight:600">+${cur}${y.growth.toLocaleString()}</td>
+      <td style="padding:5px;color:#1e40af">${y.divYield}%</td>
+      <td style="padding:5px;color:#15803d;font-weight:700">${cur}${y.monthlyDivIncome.toLocaleString()}/mo</td>
+    </tr>`;
+  });
+  tHTML+='</tbody>';
+  document.getElementById("r-table-"+key).innerHTML=tHTML;
+}
+
 /* ═══ INIT ═══ */
 buildDivPanel("ca-div");buildDivPanel("us-div");
 buildEarnPanel("ca-earn");buildEarnPanel("us-earn");
 buildFundPanel("ca-fund",FUND_CA);buildFundPanel("us-fund",FUND_US);
 buildTechPanel("ca-tech",TSX_TECH);buildTechPanel("us-tech",US_TECH);
 buildIncomePanel("ca-income",INCOME_CA);buildIncomePanel("us-income",INCOME_US);
+buildRetirePanel("ca-retire");buildRetirePanel("us-retire");
 show();
 </script>
 </body>
